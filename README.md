@@ -1,128 +1,128 @@
 # IDShield
 
-**Tu Identidad, Tu Control**  
-Plataforma de identidad digital auto-soberana con privacidad en múltiples niveles.
+**Your Identity, Your Control**  
+Self-sovereign digital identity platform with multi-level privacy.
 
-![Logo de IDShield](ruta/al/logo.png)
+![IDShield Logo](path/to/logo.png)
 
 ---
 
-## Tabla de Contenidos
+## Table of Contents
 
-- [Problema](#problema)  
-- [Solución](#solución)  
-- [Capas de Privacidad](#capas-de-privacidad)  
-- [Casos de Uso](#casos-de-uso)  
-- [Tecnología](#tecnología)  
-- [Monetización](#monetización)  
-- [Sub-sistemas](#sub-sistemas)  
+- [Problem](#problem)  
+- [Solution](#solution)  
+- [Privacy Layers](#privacy-layers)  
+- [Use Cases](#use-cases)  
+- [Technology](#technology)  
+- [Monetization](#monetization)  
+- [Sub-systems](#sub-systems)  
 - [Roadmap](#roadmap)  
-- [Cómo Levantar el Proyecto](#cómo-levantar-el-proyecto)  
-- [Contacto](#contacto)  
+- [How to Run the Project](#how-to-run-the-project)  
+- [Contact](#contact)  
 
 ---
 
-## Problema
+## Problem
 
-- Filtraciones de datos en sectores críticos como seguros, salud y finanzas.  
-- Las personas pierden control sobre su información personal.  
-- Ejemplo: Filtraciones tras accidentes o incidentes de seguridad.
-
----
-
-## Solución
-
-**IDShield**: Identidad digital soberana.  
-
-- Datos almacenados en bóveda privada.  
-- El usuario decide quién accede, cuándo y qué información comparte.  
-- Uso de pruebas ZK (Zero-Knowledge) para validar atributos sin exponer datos sensibles.
+- Data breaches in critical sectors such as insurance, healthcare, and finance.  
+- People lose control over their personal information.  
+- Example: Data leaks after accidents or security incidents.
 
 ---
 
-## Capas de Privacidad (Escudo)
+## Solution
 
-Visual del escudo con niveles 0 a 6:  
+**IDShield**: Sovereign digital identity.  
 
-- **Nivel 0:** Solo usuario.  
-- **Nivel 6:** Ecosistema de terceros (apps y gobiernos) con usuario como dueño de sus datos.
-
----
-
-## Casos de Uso
-
-- **Salud:** Historial médico con acceso controlado.  
-- **Seguros:** Validación de pólizas sin exponer datos sensibles.  
-- **Gobierno:** Identidad digital segura para trámites oficiales.  
-- **Empresas:** KYC/AML con privacidad garantizada.
+- Data stored in a private vault.  
+- The user decides who accesses, when, and what information is shared.  
+- Use of ZK (Zero-Knowledge) proofs to validate attributes without exposing sensitive data.
 
 ---
 
-## Tecnología
+## Privacy Layers (Shield)
 
-- **Midnight (ZK Contracts):** Contratos inteligentes con privacidad.  
-- **Lace Wallet:** Gestión de identidad y firma digital.  
-- **ZK Proofs:** Verificación de atributos sin exposición de información.
+Visual of the shield with levels 0 to 6:  
 
----
-
-## Monetización (Capa 6)
-
-- Licencias y APIs para empresas y gobiernos.  
-- Suscripción de mantenimiento y SLA.  
-- Módulos de valor agregado (IA, verificación).  
-- Marketplace de aplicaciones con modelo de revenue-sharing.
+- **Level 0:** User only.  
+- **Level 6:** Ecosystem of third parties (apps and governments) with the user as the data owner.
 
 ---
 
-## Sub-sistemas
+## Use Cases
 
-- **IDShield Gov:** Identidad digital para gobiernos.  
-- **IDShield Enterprise:** Gestión de identidades corporativas.  
-- **Secure Analytics:** Datos anonimizados para investigación.
+- **Healthcare:** Medical history with controlled access.  
+- **Insurance:** Policy validation without exposing sensitive data.  
+- **Government:** Secure digital identity for official procedures.  
+- **Companies:** KYC/AML with guaranteed privacy.
+
+---
+
+## Technology
+
+- **Midnight (ZK Contracts):** Smart contracts with privacy.  
+- **Lace Wallet:** Identity and digital signature management.  
+- **ZK Proofs:** Attribute verification without data exposure.
+
+---
+
+## Monetization (Layer 6)
+
+- Licenses and APIs for companies and governments.  
+- Maintenance subscription and SLA.  
+- Value-added modules (AI, verification).  
+- Application marketplace with a revenue-sharing model.
+
+---
+
+## Sub-systems
+
+- **IDShield Gov:** Digital identity for governments.  
+- **IDShield Enterprise:** Corporate identity management.  
+- **Secure Analytics:** Anonymized data for research.
 
 ---
 
 ## Roadmap
 
-- **MVP:** Integración Lace y ZK (6 meses).  
-- **Pilotos:** Hospitales y aseguradoras (12 meses).  
-- **Integración:** Gobiernos (18-24 meses).
+- **MVP:** Lace and ZK integration (6 months).  
+- **Pilots:** Hospitals and insurance companies (12 months).  
+- **Integration:** Governments (18-24 months).
 
 ---
 
-## Cómo Levantar el Proyecto
+## How to Run the Project
 
-- Requisitos previos:
-  - Node v22.
-  - Una terminal para poder ejecutar comandos.
-- Instalación de dependencias:
-  1. Debemos situarnos en la raíz del proyecto.
-  2.  Ejecutamos el comando `npm install`.
-- Cómo correr el proyecto:
-  - Para correr todos los proyectos en simultáneo:
-    1. Debemos situarnos en la raíz del monorepo.
-    2. Ejecutamos `npm run dev`.
-  - Para correr un proyecto en partícular:
-    1. Debemos situarnos en la raíz del proyecto que querramos correr. Para esto, corremos el comando `cd apps/<NOMBRE DEL PROYECTO>`.
-    2. Ejecutamos `npm run dev`.
-
----
-
-## Equipo Inside Dark Studio
-- Aldana Cueva
-- Mariano Stoll
-- Francisco Rappanizzi
-- Juan Velozo
+- Prerequisites:
+  - Node v22.  
+  - A terminal to execute commands.  
+- Install dependencies:
+  1. Navigate to the project root.  
+  2. Run the command `npm install`.  
+- How to run the project:
+  - To run all projects simultaneously:
+    1. Navigate to the monorepo root.  
+    2. Run `npm run dev`.  
+  - To run a specific project:
+    1. Navigate to the root of the project you want to run. For this, run the command `cd apps/<PROJECT NAME>`.  
+    2. Run `npm run dev`.
 
 ---
 
-## Contacto
+## Inside Dark Studio Team
+- Aldana Cueva  
+- Mariano Stoll  
+- Francisco Rappanizzi  
+- Juan Velozo  
 
-- **Demo/Prototipo:** Escanea el QR en la presentación  
+---
+
+## Contact
+
+- **Demo/Prototype:** Scan the QR in the presentation  
 - **Email:** contacto@idshield.com  
-- **Sitio Web:** [www.idshield.com](https://www.idshield.com)
+- **Website:** [www.idshield.com](https://www.idshield.com)
 
 ---
 
-**La identidad es tuya, protégela con IDShield.**
+**Your identity is yours, protect it with IDShield.**
