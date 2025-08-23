@@ -93,12 +93,27 @@ Visual del escudo con niveles 0 a 6:
 
 ## Cómo Levantar el Proyecto
 
-> Instrucciones pendientes de completar.  
-> Ejemplo de sección que puede incluir:
-> - Requisitos previos (Node.js, npm, dfx, etc.)  
-> - Instalación de dependencias  
-> - Comandos para levantar el frontend y backend  
-> - Variables de entorno necesarias  
+- Requisitos previos:
+  - Node v22.
+  - Una terminal para poder ejecutar comandos.
+- Instalación de dependencias:
+  1. Debemos situarnos en la raíz del proyecto.
+  2.  Ejecutamos el comando `npm install`.
+- Cómo correr el proyecto:
+  - Para correr todos los proyectos en simultáneo:
+    1. Debemos situarnos en la raíz del monorepo.
+    2. Ejecutamos `npm run dev`.
+  - Para correr un proyecto en partícular:
+    1. Debemos situarnos en la raíz del proyecto que querramos correr. Para esto, corremos el comando `cd apps/<NOMBRE DEL PROYECTO>`.
+    2. Ejecutamos `npm run dev`.
+
+---
+
+## Equipo Inside Dark Studio
+- Aldana Cueva
+- Mariano Stoll
+- Francisco Rappanizzi
+- Juan Velozo
 
 ---
 
