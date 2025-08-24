@@ -102,7 +102,8 @@ Visual of the shield with levels 0 to 6:
 - How to run the project:
   - To run all projects simultaneously:
     1. Navigate to the monorepo root.  
-    2. Run `npm run dev`.  
+    2. Run `npm run dev`.
+    3. The proyects will start on localhost ports :5173, :5174 and :5175 respectively.
   - To run a specific project:
     1. Navigate to the root of the project you want to run. For this, run the command `cd apps/<PROJECT NAME>`.  
     2. Run `npm run dev`.
