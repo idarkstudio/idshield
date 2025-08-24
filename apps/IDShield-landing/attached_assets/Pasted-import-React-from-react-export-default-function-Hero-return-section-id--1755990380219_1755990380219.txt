@@ -1,0 +1,53 @@
+import React from "react";
+
+export default function Hero() {
+  return (
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center"
+      style={{
+        background:
+          "radial-gradient(1200px 600px at 70% 40%, rgba(16,185,129,.08), transparent 60%), linear-gradient(180deg, #0b1220 0%, #0e1528 100%)",
+      }}
+    >
+      <div className="mx-auto w-full max-w-7xl px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        {/* Left */}
+        <div className="max-w-xl">
+          <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-400/30">
+            Participando en <strong>Midnight Hackathon – Buenos Aires</strong>
+          </span>
+          <h1 className="mt-4 text-4xl md:text-5xl font-extrabold leading-tight text-white">
+            Tu Identidad <span className="text-emerald-400">Completamente</span> Protegida
+          </h1>
+          <p className="mt-4 text-slate-300">
+            Control total sobre tus datos personales con tecnología Zero-Knowledge. Comparte
+            información sin comprometer tu privacidad.
+          </p>
+
+          <ul className="mt-5 space-y-2 text-slate-400 text-sm">
+            <li>• Sistema de privacidad multicapa (niveles 0–6)</li>
+            <li>• Demo interactiva con simulación</li>
+          </ul>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href="#demo" className="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold shadow">
+              Probar Demo
+            </a>
+            <a href="#waitlist" className="px-5 py-3 rounded-xl border border-emerald-400 text-emerald-300 hover:bg-emerald-400/10 font-semibold">
+              Unirse a Lista de Espera
+            </a>
+          </div>
+        </div>
+
+        {/* Right */}
+        <div className="md:justify-self-end">
+          <img
+            src="/hero-idshield.png"
+            alt="Vista previa de IDShield con escudo de privacidad en capas"
+            className="w-[620px] max-w-full rounded-3xl shadow-2xl ring-1 ring-white/10"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}

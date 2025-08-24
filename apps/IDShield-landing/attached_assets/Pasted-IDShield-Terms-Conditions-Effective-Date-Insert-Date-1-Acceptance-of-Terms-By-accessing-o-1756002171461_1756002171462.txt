@@ -1,0 +1,64 @@
+IDShield – Terms & Conditions
+
+Effective Date: [Insert Date]
+
+1. Acceptance of Terms
+
+By accessing or using the IDShield landing page, demo, or services, you agree to these Terms & Conditions and our Privacy Policy. If you do not agree, please do not use our site or demo.
+
+2. Purpose of the Site
+
+This landing page is intended to:
+
+Provide information about IDShield and its features.
+
+Showcase a demo of our Zero-Knowledge privacy technology.
+
+Allow visitors to join a waitlist or request updates.
+
+The demo and information provided are for demonstration and educational purposes only. They do not constitute legal, medical, or financial advice.
+
+3. Eligibility
+
+Our services are available to individuals 18 years or older. By using our site, you confirm you meet this requirement.
+
+4. User Responsibilities
+
+You agree to use our site and demo lawfully and respectfully.
+
+Do not attempt to hack, disrupt, or misuse the demo or site infrastructure.
+
+You are responsible for any information you voluntarily provide (e.g., email for waitlist).
+
+5. Intellectual Property
+
+All content on this site, including logos, designs, graphics, and text, is the property of IDShield or its licensors. You may not copy, reproduce, or distribute it without our prior written consent.
+
+6. Third-Party Links
+
+Our site may include links to third-party sites or services (e.g., hackathon partners). We are not responsible for their content or practices.
+
+7. Disclaimer of Warranties
+
+The IDShield demo is provided “as is,” without warranties of any kind, express or implied. We do not guarantee uninterrupted or error-free service, nor do we guarantee specific outcomes from using the demo.
+
+8. Limitation of Liability
+
+To the maximum extent permitted by law:
+
+IDShield is not liable for any damages, direct or indirect, resulting from your use of our landing page or demo.
+
+Any data used in the demo is illustrative; real medical or insurance decisions should not rely on demo outputs.
+
+9. Changes to Terms
+
+We may update these Terms from time to time. Updates will be posted here with a new effective date. Your continued use of our site after changes means you accept the updated terms.
+
+10. Governing Law
+
+These Terms are governed by the laws of your jurisdiction (insert applicable country). Any disputes will be resolved in the competent courts of that jurisdiction.
+
+11. Contact Us
+
+For questions about these Terms, contact: support@idshield.io
+ (replace with your contact).

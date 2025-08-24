@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDShield - Protección de Identidad y Privacidad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    'inter': ['Inter', 'sans-serif'],
+                },
+                colors: {
+                    'navy': '#1E293B',
+                    'teal': '#0F766E',
+                    'steel': '#475569',
+                    'ocean': '#0EA5E9',
+                    'emerald': '#10B981',
+                    'amber': '#F59E0B',
+                    'slate-bg': '#F8FAFC',
+                }
+            }
+        }
+    };
+    </script>
+</head>
+<body class="font-inter text-slate-800 bg-slate-bg">
+
+    <!-- @COMPONENT: NavigationHeader -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shield-alt text-2xl text-teal"></i>
+                    <span class="text-xl font-bold text-navy">IDShield</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#boveda" class="text-steel hover:text-navy transition-colors">Mi Bóveda</a>
+                    <a href="#como-funciona" class="text-steel hover:text-navy transition-colors">Cómo Funciona</a>
+                    <a href="#casos-uso" class="text-steel hover:text-navy transition-colors">Casos de Uso</a>
+                    <a href="#marketplace" class="text-steel hover:text-navy transition-colors">Marketplace</a>
+                </div>
+
+                <button class="bg-teal text-white px-4 py-2 rounded-lg hover:bg-teal/90 transition-colors">
+                    Conectar Wallet
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: NavigationHeader -->
+
+    <!-- @COMPONENT: HeroSection -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-navy via-slate-900 to-teal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <h1 class="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Tu Identidad<br>
+                        <span class="text-emerald">Completamente</span><br>
+                        Protegida
+                    </h1>
+                    <p class="text-xl mb-8 text-slate-300 leading-relaxed">
+                        Control total sobre tus datos personales con tecnología Zero-Knowledge. 
+                        Comparte información sin comprometer tu privacidad.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-emerald text-navy px-8 py-4 rounded-lg font-semibold hover:bg-emerald/90 transition-colors">
+                            Comenzar Gratis
+                        </button>
+                        <button class="border-2 border-emerald text-emerald px-8 py-4 rounded-lg font-semibold hover:bg-emerald/10 transition-colors">
+                            Ver Demo
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <!-- Privacy shield technology concept image -->
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Privacy shield technology" class="rounded-2xl shadow-2xl" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-teal/20 to-transparent rounded-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- @COMPONENT: HowItWorksSection -->
+    <section id="como-funciona" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-navy mb-4">Cómo Funciona IDShield</h2>
+                <p class="text-xl text-steel max-w-3xl mx-auto">
+                    Protege tu identidad en tres simples pasos con nuestra tecnología blockchain avanzada
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Step 1 -->
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-teal/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal/20 transition-colors">
+                        <i class="fas fa-wallet text-3xl text-teal"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-navy mb-4">Conecta tu Wallet</h3>
+                    <p class="text-steel leading-relaxed">
+                        Conecta tu wallet Lace de forma segura para acceder a todas las funcionalidades de IDShield
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-emerald/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald/20 transition-colors">
+                        <i class="fas fa-database text-3xl text-emerald"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-navy mb-4">Organiza tus Datos</h3>
+                    <p class="text-steel leading-relaxed">
+                        Almacena y organiza tu información en 7 niveles de privacidad, desde absoluta hasta ecosistema
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-ocean/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-ocean/20 transition-colors">
+                        <i class="fas fa-key text-3xl text-ocean"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-navy mb-4">Genera Pruebas ZK</h3>
+                    <p class="text-steel leading-relaxed">
+                        Comparte información verificable sin revelar datos sensibles usando Zero-Knowledge proofs
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HowItWorksSection -->
+
+    <!-- @COMPONENT: PrivacyLevelsSection -->
+    <section id="boveda" class="py-20 bg-slate-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-navy mb-4">Mi Bóveda - Niveles de Privacidad</h2>
+                <p class="text-xl text-steel max-w-3xl mx-auto">
+                    Controla exactamente qué información compartes y con quién a través de nuestro sistema de niveles
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Privacy Levels Visualization -->
+                <div class="relative">
+                    <!-- Digital security concepts -->
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Digital security concepts" class="rounded-2xl shadow-lg" />
+                    <div class="absolute inset-0 bg-gradient-to-r from-navy/80 to-transparent rounded-2xl flex items-center justify-center">
+                        <div class="text-center text-white p-8">
+                            <i class="fas fa-shield-alt text-6xl text-emerald mb-4"></i>
+                            <h3 class="text-2xl font-bold">Protección Multicapa</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Levels List -->
+                <div class="space-y-4">
+                    <!-- @MAP: privacyLevels.map(level => ( -->
+                    <div class="bg-white rounded-lg p-6 border border-slate-200 hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-navy rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold">0</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-navy">Nivel 0 · Privacidad Absoluta</h4>
+                                    <p class="text-steel text-sm">Información completamente privada</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-lock text-navy"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 border border-slate-200 hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-teal rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold">1</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-navy">Nivel 1 · Ultra Confidencial</h4>
+                                    <p class="text-steel text-sm">Solo para verificaciones críticas</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-eye-slash text-teal"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 border border-slate-200 hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-emerald rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold">2</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-navy">Nivel 2 · Confidencial Selectiva</h4>
+                                    <p class="text-steel text-sm">Compartición selectiva autorizada</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-user-check text-emerald"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 border border-slate-200 hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-ocean rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold">6</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-navy">Nivel 6 · Ecosistema Terceros</h4>
+                                    <p class="text-steel text-sm">Disponible para el marketplace</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-store text-ocean"></i>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: PrivacyLevelsSection -->
+
+    <!-- @COMPONENT: WalletConnectionDemo -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-navy mb-4">Demo Interactivo</h2>
+                <p class="text-xl text-steel max-w-3xl mx-auto">
+                    Prueba cómo funciona la conexión con Lace Wallet y la generación de pruebas Zero-Knowledge
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Wallet Connection Interface -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+                    <h3 class="text-2xl font-semibold text-navy mb-6">Conexión Lace Wallet</h3>
+                    
+                    <!-- Blockchain wallet interface -->
+                    <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400" alt="Blockchain wallet interface" class="rounded-lg mb-6 w-full" />
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-white rounded-lg border">
+                            <span class="font-medium text-navy">Estado de Conexión</span>
+                            <span class="px-3 py-1 bg-amber/10 text-amber-700 rounded-full text-sm">Desconectado</span>
+                        </div>
+                        
+                        <button data-event="click:connectWallet" class="w-full bg-teal text-white py-3 rounded-lg font-semibold hover:bg-teal/90 transition-colors">
+                            <i class="fas fa-wallet mr-2"></i>
+                            Conectar Lace Wallet
+                        </button>
+                        
+                        <p class="text-sm text-steel text-center">
+                            Demo simulado - No se requiere wallet real
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ZK Proof Generator -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+                    <h3 class="text-2xl font-semibold text-navy mb-6">Generador de Pruebas ZK</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-steel mb-2">Tipo de Verificación</label>
+                            <select class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-transparent">
+                                <option>Verificación de Edad (+18)</option>
+                                <option>Verificación de Residencia</option>
+                                <option>Verificación de Ingresos</option>
+                                <option>Verificación de Educación</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-steel mb-2">Nivel de Privacidad</label>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 p-2 border border-teal text-teal rounded-lg hover:bg-teal/10 transition-colors">
+                                    Nivel 2
+                                </button>
+                                <button class="flex-1 p-2 border border-slate-300 text-steel rounded-lg hover:bg-slate-100 transition-colors">
+                                    Nivel 3
+                                </button>
+                            </div>
+                        </div>
+
+                        <button data-event="click:generateProof" class="w-full bg-emerald text-white py-3 rounded-lg font-semibold hover:bg-emerald/90 transition-colors">
+                            <i class="fas fa-key mr-2"></i>
+                            Generar Prueba ZK
+                        </button>
+
+                        <!-- @STATE: proofGenerated:boolean = false -->
+                        <div class="bg-emerald/10 border border-emerald/20 rounded-lg p-4 text-emerald-800 text-sm" style="display: none;" data-bind="proofGenerated">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Prueba Zero-Knowledge generada exitosamente
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: WalletConnectionDemo -->
+
+    <!-- @COMPONENT: UseCasesSection -->
+    <section id="casos-uso" class="py-20 bg-slate-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-navy mb-4">Casos de Uso</h2>
+                <p class="text-xl text-steel max-w-3xl mx-auto">
+                    IDShield protege tu privacidad en múltiples sectores críticos
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Healthcare -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <!-- Healthcare data privacy -->
+                    <img src="https://pixabay.com/get/g6af5b566d8c32c78cf21dc63ed42b8bc171638d0850669cf622629cf2411ad1f735314fd86a3c6926743cc9ba1f29a578349b1ad4d56384f3d3548aa726edbd9_1280.jpg" alt="Healthcare data privacy" class="rounded-lg mb-6 w-full h-48 object-cover" />
+                    
+                    <div class="mb-4">
+                        <i class="fas fa-heartbeat text-3xl text-teal mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-navy mb-3">Salud Digital</h3>
+                        <p class="text-steel leading-relaxed mb-4">
+                            Comparte información médica necesaria sin exponer tu historial completo. 
+                            Ideal para seguros de salud y consultas médicas.
+                        </p>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-teal font-medium">HIPAA Compliant</span>
+                        <button class="text-teal hover:text-teal/80 transition-colors">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Insurance -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <!-- Insurance technology -->
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=300" alt="Insurance technology" class="rounded-lg mb-6 w-full h-48 object-cover" />
+                    
+                    <div class="mb-4">
+                        <i class="fas fa-shield-alt text-3xl text-emerald mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-navy mb-3">Seguros</h3>
+                        <p class="text-steel leading-relaxed mb-4">
+                            Verifica tu elegibilidad para seguros sin revelar información financiera sensible. 
+                            Proceso de suscripción más rápido y privado.
+                        </p>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-emerald font-medium">Verificación Instant</span>
+                        <button class="text-emerald hover:text-emerald/80 transition-colors">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Government -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <!-- Government digital services -->
+                    <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=300" alt="Government digital services" class="rounded-lg mb-6 w-full h-48 object-cover" />
+                    
+                    <div class="mb-4">
+                        <i class="fas fa-university text-3xl text-ocean mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-navy mb-3">Gobierno & Educación</h3>
+                        <p class="text-steel leading-relaxed mb-4">
+                            Accede a servicios gubernamentales y educativos verificando solo la información necesaria. 
+                            Privacidad garantizada en trámites oficiales.
+                        </p>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-ocean font-medium">Cumple Regulaciones</span>
+                        <button class="text-ocean hover:text-ocean/80 transition-colors">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: UseCasesSection -->
+
+    <!-- @COMPONENT: MarketplaceSection -->
+    <section id="marketplace" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-navy mb-4">Marketplace de Aplicaciones</h2>
+                <p class="text-xl text-steel max-w-3xl mx-auto">
+                    Explora aplicaciones que respetan tu privacidad y solo acceden a los datos que necesitas compartir
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- App Cards -->
+                <!-- @MAP: marketplaceApps.map(app => ( -->
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-teal rounded-xl flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-white text-xl"></i>
+                        </div>
+                        <span class="px-3 py-1 bg-emerald/10 text-emerald-700 rounded-full text-sm">Verificada</span>
+                    </div>
+                    
+                    <h4 class="font-semibold text-navy mb-2">HealthCheck Pro</h4>
+                    <p class="text-steel text-sm mb-4">Monitoreo de salud que solo accede a métricas básicas</p>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-steel">Nivel 3 requerido</span>
+                        <button class="text-teal hover:text-teal/80 transition-colors">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-emerald rounded-xl flex items-center justify-center">
+                            <i class="fas fa-car text-white text-xl"></i>
+                        </div>
+                        <span class="px-3 py-1 bg-emerald/10 text-emerald-700 rounded-full text-sm">Verificada</span>
+                    </div>
+                    
+                    <h4 class="font-semibold text-navy mb-2">AutoSecure</h4>
+                    <p class="text-steel text-sm mb-4">Seguro de auto con verificación de historial mínima</p>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-steel">Nivel 4 requerido</span>
+                        <button class="text-emerald hover:text-emerald/80 transition-colors">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-ocean rounded-xl flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <span class="px-3 py-1 bg-emerald/10 text-emerald-700 rounded-full text-sm">Verificada</span>
+                    </div>
+                    
+                    <h4 class="font-semibold text-navy mb-2">EduVerify</h4>
+                    <p class="text-steel text-sm mb-4">Verificación de credenciales académicas</p>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-steel">Nivel 5 requerido</span>
+                        <button class="text-ocean hover:text-ocean/80 transition-colors">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- @END_MAP )) -->
+            </div>
+
+            <div class="text-center mt-12">
+                <button class="bg-navy text-white px-8 py-3 rounded-lg font-semibold hover:bg-navy/90 transition-colors">
+                    Ver Todas las Apps
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: MarketplaceSection -->
+
+    <!-- @COMPONENT: AccessRequestsSection -->
+    <section class="py-20 bg-slate-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-navy mb-4">Solicitudes de Acceso</h2>
+                <p class="text-xl text-steel max-w-3xl mx-auto">
+                    Mantén el control total sobre quién accede a tu información y para qué propósito
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Pending Requests -->
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-navy">Pendientes</h3>
+                        <span class="px-3 py-1 bg-amber/10 text-amber-700 rounded-full text-sm">3 nuevas</span>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 border border-slate-200 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-medium text-navy">HealthApp</span>
+                                <span class="text-xs text-amber-600">Pendiente</span>
+                            </div>
+                            <p class="text-sm text-steel mb-3">Solicita acceso a edad y género para personalización</p>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-emerald text-white py-2 px-3 rounded text-sm hover:bg-emerald/90 transition-colors">
+                                    Aprobar
+                                </button>
+                                <button class="flex-1 bg-red-500 text-white py-2 px-3 rounded text-sm hover:bg-red-600 transition-colors">
+                                    Rechazar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Approved Requests -->
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-navy">Aprobadas</h3>
+                        <span class="px-3 py-1 bg-emerald/10 text-emerald-700 rounded-full text-sm">12 activas</span>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 border border-emerald/20 bg-emerald/5 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-medium text-navy">AutoSecure</span>
+                                <span class="text-xs text-emerald-600">Activa</span>
+                            </div>
+                            <p class="text-sm text-steel mb-3">Acceso a historial de conducción - Nivel 3</p>
+                            <button class="text-emerald text-sm hover:text-emerald/80 transition-colors">
+                                Ver detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revoked Requests -->
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-navy">Revocadas</h3>
+                        <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm">2 recientes</span>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 border border-red-200 bg-red-50 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-medium text-navy">DataMining Corp</span>
+                                <span class="text-xs text-red-600">Revocada</span>
+                            </div>
+                            <p class="text-sm text-steel mb-3">Acceso revocado por uso indebido</p>
+                            <button class="text-red-600 text-sm hover:text-red-700 transition-colors">
+                                Ver razón
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AccessRequestsSection -->
+
+    <!-- @COMPONENT: ContactSection -->
+    <section class="py-20 bg-navy">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-white mb-4">Únete al Futuro de la Privacidad</h2>
+                <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+                    Sé parte de la revolución en protección de datos personales. Regístrate para early access.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-check-circle text-emerald text-2xl"></i>
+                            <span class="text-lg">Control total de tus datos</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-check-circle text-emerald text-2xl"></i>
+                            <span class="text-lg">Tecnología Zero-Knowledge</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-check-circle text-emerald text-2xl"></i>
+                            <span class="text-lg">Integración con Cardano</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-check-circle text-emerald text-2xl"></i>
+                            <span class="text-lg">Marketplace de apps verificadas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8">
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-steel mb-2">Nombre Completo</label>
+                            <input type="text" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-transparent" placeholder="Tu nombre completo" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-steel mb-2">Email</label>
+                            <input type="email" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-transparent" placeholder="tu@email.com" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-steel mb-2">Interés Principal</label>
+                            <select class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-transparent">
+                                <option>Uso Personal</option>
+                                <option>Desarrollo de Apps</option>
+                                <option>Integración Empresarial</option>
+                                <option>Investigación</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="w-full bg-teal text-white py-3 rounded-lg font-semibold hover:bg-teal/90 transition-colors">
+                            Solicitar Early Access
+                        </button>
+
+                        <p class="text-xs text-steel text-center">
+                            Al registrarte, aceptas nuestros términos de privacidad. No spam, prometido.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ContactSection -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-6">
+                        <i class="fas fa-shield-alt text-2xl text-teal"></i>
+                        <span class="text-xl font-bold text-white">IDShield</span>
+                    </div>
+                    <p class="text-slate-400 mb-6 max-w-md">
+                        Protegiendo tu identidad digital con tecnología blockchain avanzada y pruebas Zero-Knowledge.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-slate-400 hover:text-teal transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-teal transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-teal transition-colors">
+                            <i class="fab fa-discord text-xl"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-teal transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Producto</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-teal transition-colors">Características</a></li>
+                        <li><a href="#" class="hover:text-teal transition-colors">Seguridad</a></li>
+                        <li><a href="#" class="hover:text-teal transition-colors">Integración</a></li>
+                        <li><a href="#" class="hover:text-teal transition-colors">API Docs</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Soporte</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-teal transition-colors">Documentación</a></li>
+                        <li><a href="#" class="hover:text-teal transition-colors">Ayuda</a></li>
+                        <li><a href="#" class="hover:text-teal transition-colors">Contacto</a></li>
+                        <li><a href="#" class="hover:text-teal transition-colors">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-400 text-sm">
+                    © 2024 IDShield. Todos los derechos reservados.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-slate-400 hover:text-teal transition-colors text-sm">Privacidad</a>
+                    <a href="#" class="text-slate-400 hover:text-teal transition-colors text-sm">Términos</a>
+                    <a href="#" class="text-slate-400 hover:text-teal transition-colors text-sm">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+    (function() {
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mock wallet connection demo
+        const connectWalletBtn = document.querySelector('[data-event="click:connectWallet"]');
+        if (connectWalletBtn) {
+            connectWalletBtn.addEventListener('click', function() {
+                // TODO: Implement actual Lace wallet connection
+                this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Conectando...';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-check mr-2"></i>Wallet Conectada';
+                    this.classList.remove('bg-teal', 'hover:bg-teal/90');
+                    this.classList.add('bg-emerald', 'hover:bg-emerald/90');
+                    
+                    // Update connection status
+                    const statusElement = document.querySelector('.text-amber-700');
+                    if (statusElement) {
+                        statusElement.textContent = 'Conectado';
+                        statusElement.classList.remove('bg-amber/10', 'text-amber-700');
+                        statusElement.classList.add('bg-emerald/10', 'text-emerald-700');
+                    }
+                }, 2000);
+            });
+        }
+
+        // Mock ZK proof generation
+        const generateProofBtn = document.querySelector('[data-event="click:generateProof"]');
+        if (generateProofBtn) {
+            generateProofBtn.addEventListener('click', function() {
+                // TODO: Implement actual ZK proof generation logic
+                this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Generando...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-check mr-2"></i>Prueba Generada';
+                    this.disabled = false;
+                    
+                    // Show success message
+                    const successMsg = document.querySelector('[data-bind="proofGenerated"]');
+                    if (successMsg) {
+                        successMsg.style.display = 'block';
+                    }
+                }, 3000);
+            });
+        }
+
+        // Add hover effects to privacy level cards
+        document.querySelectorAll('.cursor-pointer').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.classList.add('scale-105');
+            });
+            card.addEventListener('mouseleave', function() {
+                this.classList.remove('scale-105');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

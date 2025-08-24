@@ -1,0 +1,56 @@
+Explicación de cada Nivel
+Nivel 0 – Información Confidencial Absoluta
+
+Acceso: Solo el usuario; nunca compartida.
+
+Ejemplos: Historial médico completo, llaves privadas, documentos de identidad en crudo.
+
+Seguridad: Cifrado total y almacenado en bóveda privada. Ninguna API o tercero puede acceder.
+
+Nivel 1 – Información Sensible
+
+Acceso: Compartida solo en casos de verificación crítica con consentimiento explícito.
+
+Ejemplos: Resultados médicos específicos, datos financieros sensibles (cuentas, tarjetas).
+
+Seguridad: Puede otorgarse acceso temporal y auditado.
+
+Nivel 2 – Información Privada
+
+Acceso: Compartida de forma selectiva con usuarios/organizaciones autorizadas.
+
+Ejemplos: Dirección, teléfono, historial laboral o académico.
+
+Seguridad: Encriptada; solo revelada a partes verificadas y con permisos de nivel adecuado.
+
+Nivel 3 – Información Interna
+
+Acceso: Usada para interacciones internas dentro de servicios o empresas, bajo acuerdos de privacidad.
+
+Ejemplos: Evaluaciones internas, datos no públicos de seguros, reportes no sensibles.
+
+Seguridad: Acceso regulado, con trazabilidad y auditoría.
+
+Nivel 4 – Información Pública Controlada
+
+Acceso: Información que puede hacerse visible parcialmente al público o en contextos de confianza.
+
+Ejemplos: Perfil profesional, certificados públicos, información que el usuario quiera compartir en redes controladas.
+
+Seguridad: Control sobre qué partes son visibles y a quién.
+
+Nivel 5 – ZK Data (Zero-Knowledge Proofs)
+
+Acceso: Uso de pruebas criptográficas ZK para verificar atributos sin exponer la información real.
+
+Ejemplos: Verificación de que eres mayor de 18 sin revelar tu fecha de nacimiento, prueba de cobertura de seguro sin mostrar la póliza completa.
+
+Seguridad: Máxima privacidad; datos nunca se revelan, solo se prueba el atributo.
+
+Nivel 6 – Ecosystem Applications
+
+Acceso: Empresas y desarrolladores pueden construir aplicaciones sobre la infraestructura de IDShield, usando datos en forma modular y controlada.
+
+Ejemplos: Aplicaciones médicas, seguros, identidad digital, gobernanza.
+
+Seguridad: El usuario sigue siendo el dueño de los datos y aprueba cada uso; IDShield monetiza a través de APIs/licencias en este nivel.

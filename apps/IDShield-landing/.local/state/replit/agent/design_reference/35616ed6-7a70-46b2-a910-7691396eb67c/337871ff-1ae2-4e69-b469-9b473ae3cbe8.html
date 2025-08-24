@@ -1,0 +1,949 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDShield - Panel de Control de Privacidad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'privacy': {
+                            0: '#ef4444', // Absolute Privacy - Red
+                            1: '#f97316', // Ultra Confidential - Orange  
+                            2: '#eab308', // Selective Confidential - Yellow
+                            3: '#22c55e', // Semi Public - Green
+                            4: '#06b6d4', // Optional Public - Cyan
+                            5: '#3b82f6', // Anonymized - Blue
+                            6: '#8b5cf6'  // Third Party Ecosystem - Purple
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="bg-slate-50 font-inter">
+    <!-- @COMPONENT: MainLayout -->
+    <div class="flex h-screen bg-slate-50">
+        <!-- @COMPONENT: Sidebar -->
+        <aside class="w-64 bg-white shadow-lg border-r border-slate-200">
+            <div class="p-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-slate-900">IDShield</h1>
+                        <p class="text-sm text-slate-500">Privacidad Digital</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="px-4 pb-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#dashboard" data-nav="dashboard" class="nav-item active flex items-center px-4 py-3 text-blue-600 bg-blue-50 rounded-lg transition-all duration-200">
+                            <i class="fas fa-home w-5 text-center mr-3"></i>
+                            <span class="font-medium">Panel Principal</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#vault" data-nav="vault" class="nav-item flex items-center px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                            <i class="fas fa-database w-5 text-center mr-3"></i>
+                            <span class="font-medium">Mi Bóveda</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#wallet" data-nav="wallet" class="nav-item flex items-center px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                            <i class="fas fa-wallet w-5 text-center mr-3"></i>
+                            <span class="font-medium">Conectar Wallet</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#requests" data-nav="requests" class="nav-item flex items-center px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                            <i class="fas fa-key w-5 text-center mr-3"></i>
+                            <span class="font-medium">Solicitudes de Acceso</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#zkproof" data-nav="zkproof" class="nav-item flex items-center px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                            <i class="fas fa-certificate w-5 text-center mr-3"></i>
+                            <span class="font-medium">Emitir Prueba ZK</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#marketplace" data-nav="marketplace" class="nav-item flex items-center px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                            <i class="fas fa-store w-5 text-center mr-3"></i>
+                            <span class="font-medium">Marketplace</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="px-4 py-6 border-t border-slate-200 mt-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-slate-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-slate-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-900" data-bind="user.name">Usuario Demo</p>
+                        <p class="text-xs text-slate-500">ID: ****5678</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- @END_COMPONENT: Sidebar -->
+
+        <!-- @COMPONENT: MainContent -->
+        <main class="flex-1 overflow-auto">
+            <!-- @COMPONENT: Header -->
+            <header class="bg-white border-b border-slate-200 px-8 py-4">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900" id="page-title">Panel Principal</h2>
+                        <p class="text-slate-600 mt-1" id="page-subtitle">Gestiona tu identidad digital de forma segura</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+                            <i class="fas fa-bell text-lg"></i>
+                        </button>
+                        <button class="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+                            <i class="fas fa-cog text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <!-- @END_COMPONENT: Header -->
+
+            <!-- @COMPONENT: Dashboard View -->
+            <div id="dashboard-view" class="content-view p-8">
+                <!-- Stats Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-slate-600">Datos Protegidos</p>
+                                <p class="text-2xl font-bold text-slate-900 mt-1" data-bind="stats.protectedData">247</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-blue-600 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-slate-600">Solicitudes Pendientes</p>
+                                <p class="text-2xl font-bold text-slate-900 mt-1" data-bind="stats.pendingRequests">3</p>
+                            </div>
+                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-clock text-amber-600 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-slate-600">Pruebas ZK Emitidas</p>
+                                <p class="text-2xl font-bold text-slate-900 mt-1" data-bind="stats.zkProofs">12</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-certificate text-green-600 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-slate-600">Estado Wallet</p>
+                                <p class="text-lg font-semibold text-green-600 mt-1">Conectado</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-wallet text-green-600 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <h3 class="text-lg font-semibold text-slate-900 mb-4">Acciones Rápidas</h3>
+                        <div class="space-y-3">
+                            <button class="w-full flex items-center justify-between p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-plus-circle text-blue-600"></i>
+                                    <span class="font-medium text-slate-900">Agregar Nuevos Datos</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-slate-400"></i>
+                            </button>
+                            <button class="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-eye text-slate-600"></i>
+                                    <span class="font-medium text-slate-900">Revisar Solicitudes</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-slate-400"></i>
+                            </button>
+                            <button class="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-download text-slate-600"></i>
+                                    <span class="font-medium text-slate-900">Generar Prueba ZK</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-slate-400"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <h3 class="text-lg font-semibold text-slate-900 mb-4">Actividad Reciente</h3>
+                        <div class="space-y-4">
+                            <!-- @MAP: recentActivity.map(activity => ( -->
+                            <div class="flex items-start space-x-3" data-mock="true">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mt-1">
+                                    <i class="fas fa-shield-alt text-blue-600 text-xs"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-slate-900">Datos médicos agregados a Nivel 1</p>
+                                    <p class="text-xs text-slate-500">Hace 2 horas</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3" data-mock="true">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mt-1">
+                                    <i class="fas fa-check text-green-600 text-xs"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-slate-900">Solicitud de acceso aprobada</p>
+                                    <p class="text-xs text-slate-500">Hace 5 horas</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3" data-mock="true">
+                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mt-1">
+                                    <i class="fas fa-certificate text-purple-600 text-xs"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-slate-900">Prueba ZK generada exitosamente</p>
+                                    <p class="text-xs text-slate-500">Ayer</p>
+                                </div>
+                            </div>
+                            <!-- @END_MAP )) -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: Dashboard View -->
+
+            <!-- @COMPONENT: Vault View -->
+            <div id="vault-view" class="content-view p-8 hidden">
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-slate-900 mb-2">Visor de Datos por Niveles</h3>
+                    <p class="text-slate-600">Organiza tus datos según su nivel de privacidad</p>
+                </div>
+
+                <!-- Privacy Level Selector -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+                    <h4 class="text-lg font-semibold text-slate-900 mb-4">Niveles de Privacidad</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        <!-- @MAP: privacyLevels.map(level => ( -->
+                        <button class="privacy-level-btn text-left p-4 rounded-lg border-2 border-transparent hover:border-slate-200 transition-all" data-level="0">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-4 h-4 bg-privacy-0 rounded-full"></div>
+                                <span class="font-semibold text-slate-900">Nivel 0</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Privacidad Absoluta</p>
+                            <p class="text-xs text-slate-500 mt-1">Solo tú tienes acceso</p>
+                        </button>
+                        <button class="privacy-level-btn text-left p-4 rounded-lg border-2 border-transparent hover:border-slate-200 transition-all" data-level="1">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-4 h-4 bg-privacy-1 rounded-full"></div>
+                                <span class="font-semibold text-slate-900">Nivel 1</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Ultra Confidencial</p>
+                            <p class="text-xs text-slate-500 mt-1">Máxima protección</p>
+                        </button>
+                        <button class="privacy-level-btn text-left p-4 rounded-lg border-2 border-transparent hover:border-slate-200 transition-all" data-level="2">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-4 h-4 bg-privacy-2 rounded-full"></div>
+                                <span class="font-semibold text-slate-900">Nivel 2</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Confidencial Selectiva</p>
+                            <p class="text-xs text-slate-500 mt-1">Acceso limitado</p>
+                        </button>
+                        <button class="privacy-level-btn text-left p-4 rounded-lg border-2 border-transparent hover:border-slate-200 transition-all" data-level="3">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-4 h-4 bg-privacy-3 rounded-full"></div>
+                                <span class="font-semibold text-slate-900">Nivel 3</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Semi Pública</p>
+                            <p class="text-xs text-slate-500 mt-1">Parcialmente visible</p>
+                        </button>
+                        <button class="privacy-level-btn text-left p-4 rounded-lg border-2 border-transparent hover:border-slate-200 transition-all" data-level="4">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-4 h-4 bg-privacy-4 rounded-full"></div>
+                                <span class="font-semibold text-slate-900">Nivel 4</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Pública Opcional</p>
+                            <p class="text-xs text-slate-500 mt-1">Tú decides visibilidad</p>
+                        </button>
+                        <button class="privacy-level-btn text-left p-4 rounded-lg border-2 border-transparent hover:border-slate-200 transition-all" data-level="5">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-4 h-4 bg-privacy-5 rounded-full"></div>
+                                <span class="font-semibold text-slate-900">Nivel 5</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Anonimizados</p>
+                            <p class="text-xs text-slate-500 mt-1">Sin identificación personal</p>
+                        </button>
+                        <button class="privacy-level-btn text-left p-4 rounded-lg border-2 border-transparent hover:border-slate-200 transition-all" data-level="6">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-4 h-4 bg-privacy-6 rounded-full"></div>
+                                <span class="font-semibold text-slate-900">Nivel 6</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Ecosistema Terceros</p>
+                            <p class="text-xs text-slate-500 mt-1">Compartible con apps</p>
+                        </button>
+                        <!-- @END_MAP )) -->
+                    </div>
+                </div>
+
+                <!-- Data Display -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h4 class="text-lg font-semibold text-slate-900">Datos en <span id="current-level-name">Nivel 0 - Privacidad Absoluta</span></h4>
+                        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-plus mr-2"></i>Agregar Datos
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-slate-200">
+                                    <th class="text-left py-3 px-4 font-semibold text-slate-700">Tipo de Dato</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-slate-700">Descripción</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-slate-700">Fecha</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-slate-700">Estado</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-slate-700">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="data-table-body">
+                                <!-- @MAP: levelData.map(item => ( -->
+                                <tr class="border-b border-slate-100 hover:bg-slate-50" data-mock="true">
+                                    <td class="py-3 px-4">
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fas fa-user-md text-slate-400"></i>
+                                            <span class="font-medium text-slate-900">Historial Médico</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-4 text-slate-600">Diagnósticos y tratamientos</td>
+                                    <td class="py-3 px-4 text-slate-500">15/03/2024</td>
+                                    <td class="py-3 px-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Protegido
+                                        </span>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <button class="text-blue-600 hover:text-blue-800 mr-3">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-600 hover:text-red-800">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- @END_MAP )) -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: Vault View -->
+
+            <!-- @COMPONENT: Wallet View -->
+            <div id="wallet-view" class="content-view p-8 hidden">
+                <div class="max-w-2xl mx-auto">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Conectar Wallet</h3>
+                        <p class="text-slate-600">Conecta tu wallet Lace para acceder a funcionalidades completas</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-wallet text-blue-600 text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-slate-900 mb-2">Estado de Conexión</h4>
+                            <p class="text-green-600 font-medium">✓ Wallet Conectado</p>
+                        </div>
+
+                        <div class="space-y-4 mb-6">
+                            <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                                <span class="text-slate-700">Dirección:</span>
+                                <span class="text-slate-900 font-mono text-sm">addr1...x7y8z9</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                                <span class="text-slate-700">Red:</span>
+                                <span class="text-slate-900 font-medium">Cardano Mainnet</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                                <span class="text-slate-700">Balance ADA:</span>
+                                <span class="text-slate-900 font-medium">1,234.56 ADA</span>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <button class="flex-1 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                                <i class="fas fa-unlink mr-2"></i>
+                                Desconectar
+                            </button>
+                            <button class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-sync mr-2"></i>
+                                Actualizar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-info-circle text-blue-600 mt-1"></i>
+                            <div>
+                                <h5 class="font-medium text-blue-900 mb-1">Información Importante</h5>
+                                <p class="text-blue-700 text-sm">Tu wallet está conectado de forma segura. Todas las transacciones requieren tu autorización.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: Wallet View -->
+
+            <!-- @COMPONENT: Requests View -->
+            <div id="requests-view" class="content-view p-8 hidden">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Solicitudes de Acceso</h3>
+                    <p class="text-slate-600">Gestiona las solicitudes de acceso a tus datos</p>
+                </div>
+
+                <!-- Request Tabs -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 mb-6">
+                    <div class="border-b border-slate-200">
+                        <nav class="flex space-x-8 px-6">
+                            <button class="request-tab active py-4 px-2 border-b-2 border-blue-600 text-blue-600 font-medium" data-tab="pending">
+                                Pendientes (3)
+                            </button>
+                            <button class="request-tab py-4 px-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium" data-tab="approved">
+                                Aprobadas (12)
+                            </button>
+                            <button class="request-tab py-4 px-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium" data-tab="revoked">
+                                Revocadas (2)
+                            </button>
+                        </nav>
+                    </div>
+
+                    <div class="p-6">
+                        <!-- Pending Requests -->
+                        <div id="pending-requests" class="request-content">
+                            <div class="space-y-4">
+                                <!-- @MAP: pendingRequests.map(request => ( -->
+                                <div class="border border-slate-200 rounded-lg p-6" data-mock="true">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                                <i class="fas fa-hospital text-blue-600"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-slate-900">Hospital San Rafael</h4>
+                                                <p class="text-sm text-slate-600">Solicita acceso a historial médico</p>
+                                            </div>
+                                        </div>
+                                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm font-medium rounded-full">
+                                            Pendiente
+                                        </span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                        <div>
+                                            <p class="text-sm text-slate-500 mb-1">Datos Solicitados:</p>
+                                            <p class="text-sm font-medium text-slate-900">Nivel 1 - Historial Médico</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-slate-500 mb-1">Propósito:</p>
+                                            <p class="text-sm font-medium text-slate-900">Consulta médica</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-slate-500 mb-1">Duración:</p>
+                                            <p class="text-sm font-medium text-slate-900">30 días</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-3">
+                                        <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                                            <i class="fas fa-check mr-2"></i>Aprobar
+                                        </button>
+                                        <button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                                            <i class="fas fa-times mr-2"></i>Rechazar
+                                        </button>
+                                        <button class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition-colors">
+                                            <i class="fas fa-info mr-2"></i>Detalles
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- @END_MAP )) -->
+                            </div>
+                        </div>
+
+                        <!-- Approved Requests -->
+                        <div id="approved-requests" class="request-content hidden">
+                            <div class="space-y-4">
+                                <div class="border border-slate-200 rounded-lg p-6" data-mock="true">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                                <i class="fas fa-university text-green-600"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-slate-900">Universidad Nacional</h4>
+                                                <p class="text-sm text-slate-600">Acceso a certificados académicos</p>
+                                            </div>
+                                        </div>
+                                        <span class="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
+                                            Aprobada
+                                        </span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <p class="text-sm text-slate-600">Expira en 15 días</p>
+                                        <button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                                            <i class="fas fa-ban mr-2"></i>Revocar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Revoked Requests -->
+                        <div id="revoked-requests" class="request-content hidden">
+                            <div class="space-y-4">
+                                <div class="border border-slate-200 rounded-lg p-6" data-mock="true">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                                                <i class="fas fa-building text-red-600"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold text-slate-900">Empresa XYZ</h4>
+                                                <p class="text-sm text-slate-600">Acceso revocado por el usuario</p>
+                                            </div>
+                                        </div>
+                                        <span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
+                                            Revocada
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: Requests View -->
+
+            <!-- @COMPONENT: ZK Proof View -->
+            <div id="zkproof-view" class="content-view p-8 hidden">
+                <div class="max-w-3xl mx-auto">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Emitir Prueba ZK</h3>
+                        <p class="text-slate-600">Genera pruebas de conocimiento cero para verificar datos sin revelar información</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+                        <form class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Tipo de Prueba</label>
+                                <select class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option>Verificación de Edad</option>
+                                    <option>Verificación de Identidad</option>
+                                    <option>Certificación Académica</option>
+                                    <option>Certificación Profesional</option>
+                                    <option>Verificación de Ingresos</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Datos a Verificar</label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <label class="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                        <input type="checkbox" class="w-4 h-4 text-blue-600 rounded" data-mock="true">
+                                        <span class="text-slate-700">Fecha de Nacimiento</span>
+                                    </label>
+                                    <label class="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                        <input type="checkbox" class="w-4 h-4 text-blue-600 rounded" data-mock="true">
+                                        <span class="text-slate-700">Nombre Completo</span>
+                                    </label>
+                                    <label class="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                        <input type="checkbox" class="w-4 h-4 text-blue-600 rounded" data-mock="true">
+                                        <span class="text-slate-700">Documento de Identidad</span>
+                                    </label>
+                                    <label class="flex items-center space-x-3 p-4 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                        <input type="checkbox" class="w-4 h-4 text-blue-600 rounded" data-mock="true">
+                                        <span class="text-slate-700">Dirección</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Destinatario</label>
+                                <input type="text" placeholder="Dirección del destinatario o ID de aplicación" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" data-mock="true">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Vigencia</label>
+                                <select class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option>1 hora</option>
+                                    <option>24 horas</option>
+                                    <option>7 días</option>
+                                    <option>30 días</option>
+                                    <option>90 días</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-shield-alt text-blue-600 mt-1"></i>
+                                    <div>
+                                        <h5 class="font-medium text-blue-900 mb-1">Privacidad Garantizada</h5>
+                                        <p class="text-blue-700 text-sm">La prueba ZK permite verificar la información sin revelar los datos reales. Solo se confirma la veracidad.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex space-x-4">
+                                <button type="button" class="flex-1 px-6 py-3 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition-colors">
+                                    <i class="fas fa-eye mr-2"></i>Vista Previa
+                                </button>
+                                <button type="submit" class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-certificate mr-2"></i>Generar Prueba ZK
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: ZK Proof View -->
+
+            <!-- @COMPONENT: Marketplace View -->
+            <div id="marketplace-view" class="content-view p-8 hidden">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Marketplace de Aplicaciones</h3>
+                    <p class="text-slate-600">Descubre aplicaciones que puedes usar con tus datos de Nivel 6</p>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+                    <h4 class="text-lg font-semibold text-slate-900 mb-4">Categorías</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="category-filter active px-4 py-2 bg-blue-600 text-white rounded-lg transition-colors" data-category="all">
+                            Todas las Apps
+                        </button>
+                        <button class="category-filter px-4 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg transition-colors" data-category="health">
+                            <i class="fas fa-heartbeat mr-2"></i>Salud
+                        </button>
+                        <button class="category-filter px-4 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg transition-colors" data-category="insurance">
+                            <i class="fas fa-shield-alt mr-2"></i>Seguros
+                        </button>
+                        <button class="category-filter px-4 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg transition-colors" data-category="education">
+                            <i class="fas fa-graduation-cap mr-2"></i>Gov / Educación
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Apps Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- @MAP: apps.map(app => ( -->
+                    <!-- Health Apps -->
+                    <div class="app-card bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow" data-category="health" data-mock="true">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-heartbeat text-red-600 text-lg"></i>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Verificada</span>
+                        </div>
+                        <h5 class="text-lg font-semibold text-slate-900 mb-2">HealthTracker Pro</h5>
+                        <p class="text-slate-600 text-sm mb-4">Monitorea tu salud con datos seguros y privados</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm font-medium text-slate-700">4.8</span>
+                                <span class="text-sm text-slate-500">(2.1k)</span>
+                            </div>
+                            <span class="text-sm text-slate-500">Gratis</span>
+                        </div>
+                        <button class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            Conectar App
+                        </button>
+                    </div>
+
+                    <div class="app-card bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow" data-category="insurance" data-mock="true">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-blue-600 text-lg"></i>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Verificada</span>
+                        </div>
+                        <h5 class="text-lg font-semibold text-slate-900 mb-2">SecureLife</h5>
+                        <p class="text-slate-600 text-sm mb-4">Seguros personalizados basados en tu perfil</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm font-medium text-slate-700">4.6</span>
+                                <span class="text-sm text-slate-500">(890)</span>
+                            </div>
+                            <span class="text-sm text-slate-500">Premium</span>
+                        </div>
+                        <button class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            Conectar App
+                        </button>
+                    </div>
+
+                    <div class="app-card bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow" data-category="education" data-mock="true">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-green-600 text-lg"></i>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Verificada</span>
+                        </div>
+                        <h5 class="text-lg font-semibold text-slate-900 mb-2">EduVerify</h5>
+                        <p class="text-slate-600 text-sm mb-4">Verificación automática de credenciales académicas</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm font-medium text-slate-700">4.9</span>
+                                <span class="text-sm text-slate-500">(1.5k)</span>
+                            </div>
+                            <span class="text-sm text-slate-500">Gratis</span>
+                        </div>
+                        <button class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            Conectar App
+                        </button>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+            </div>
+            <!-- @END_COMPONENT: Marketplace View -->
+        </main>
+        <!-- @END_COMPONENT: MainContent -->
+    </div>
+    <!-- @END_COMPONENT: MainLayout -->
+
+    <script>
+        (function() {
+            // Navigation functionality
+            function initNavigation() {
+                const navItems = document.querySelectorAll('.nav-item');
+                const contentViews = document.querySelectorAll('.content-view');
+                const pageTitle = document.getElementById('page-title');
+                const pageSubtitle = document.getElementById('page-subtitle');
+
+                const pages = {
+                    dashboard: {
+                        title: 'Panel Principal',
+                        subtitle: 'Gestiona tu identidad digital de forma segura'
+                    },
+                    vault: {
+                        title: 'Mi Bóveda',
+                        subtitle: 'Organiza tus datos según su nivel de privacidad'
+                    },
+                    wallet: {
+                        title: 'Conectar Wallet',
+                        subtitle: 'Gestiona tu conexión con la blockchain'
+                    },
+                    requests: {
+                        title: 'Solicitudes de Acceso',
+                        subtitle: 'Gestiona las solicitudes de acceso a tus datos'
+                    },
+                    zkproof: {
+                        title: 'Emitir Prueba ZK',
+                        subtitle: 'Genera pruebas de conocimiento cero'
+                    },
+                    marketplace: {
+                        title: 'Marketplace',
+                        subtitle: 'Descubre aplicaciones compatibles'
+                    }
+                };
+
+                navItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetView = item.getAttribute('data-nav');
+                        
+                        // Update active nav item
+                        navItems.forEach(nav => nav.classList.remove('active', 'text-blue-600', 'bg-blue-50'));
+                        item.classList.add('active', 'text-blue-600', 'bg-blue-50');
+                        
+                        // Show target content view
+                        contentViews.forEach(view => view.classList.add('hidden'));
+                        document.getElementById(`${targetView}-view`).classList.remove('hidden');
+                        
+                        // Update page title
+                        if (pages[targetView]) {
+                            pageTitle.textContent = pages[targetView].title;
+                            pageSubtitle.textContent = pages[targetView].subtitle;
+                        }
+                    });
+                });
+            }
+
+            // Privacy level functionality
+            function initPrivacyLevels() {
+                const levelButtons = document.querySelectorAll('.privacy-level-btn');
+                const currentLevelName = document.getElementById('current-level-name');
+                const dataTableBody = document.getElementById('data-table-body');
+
+                const levelNames = {
+                    0: 'Nivel 0 - Privacidad Absoluta',
+                    1: 'Nivel 1 - Ultra Confidencial',
+                    2: 'Nivel 2 - Confidencial Selectiva',
+                    3: 'Nivel 3 - Semi Pública',
+                    4: 'Nivel 4 - Pública Opcional',
+                    5: 'Nivel 5 - Anonimizados',
+                    6: 'Nivel 6 - Ecosistema Terceros'
+                };
+
+                const mockData = {
+                    0: [
+                        { type: 'Historial Médico', desc: 'Diagnósticos y tratamientos', date: '15/03/2024', icon: 'fa-user-md' },
+                        { type: 'Datos Financieros', desc: 'Cuentas bancarias y activos', date: '12/03/2024', icon: 'fa-university' }
+                    ],
+                    1: [
+                        { type: 'Documento de Identidad', desc: 'Cédula de ciudadanía', date: '10/03/2024', icon: 'fa-id-card' },
+                        { type: 'Registros Legales', desc: 'Antecedentes judiciales', date: '08/03/2024', icon: 'fa-gavel' }
+                    ],
+                    2: [
+                        { type: 'Certificados Académicos', desc: 'Títulos universitarios', date: '05/03/2024', icon: 'fa-graduation-cap' },
+                        { type: 'Licencias Profesionales', desc: 'Certificaciones laborales', date: '02/03/2024', icon: 'fa-certificate' }
+                    ],
+                    3: [
+                        { type: 'Información de Contacto', desc: 'Email y teléfono público', date: '01/03/2024', icon: 'fa-address-card' }
+                    ],
+                    4: [
+                        { type: 'Perfil Profesional', desc: 'Experiencia laboral', date: '28/02/2024', icon: 'fa-briefcase' }
+                    ],
+                    5: [
+                        { type: 'Estadísticas Demográficas', desc: 'Datos agregados y anonimizados', date: '25/02/2024', icon: 'fa-chart-bar' }
+                    ],
+                    6: [
+                        { type: 'Datos de Aplicaciones', desc: 'Información compartida con apps', date: '20/02/2024', icon: 'fa-mobile-alt' }
+                    ]
+                };
+
+                levelButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const level = button.getAttribute('data-level');
+                        
+                        // Update active button
+                        levelButtons.forEach(btn => btn.classList.remove('border-blue-500', 'bg-blue-50'));
+                        button.classList.add('border-blue-500', 'bg-blue-50');
+                        
+                        // Update level name
+                        currentLevelName.textContent = levelNames[level];
+                        
+                        // Update table data
+                        const data = mockData[level] || [];
+                        dataTableBody.innerHTML = data.map(item => `
+                            <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fas ${item.icon} text-slate-400"></i>
+                                        <span class="font-medium text-slate-900">${item.type}</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-slate-600">${item.desc}</td>
+                                <td class="py-3 px-4 text-slate-500">${item.date}</td>
+                                <td class="py-3 px-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Protegido
+                                    </span>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-600 hover:text-blue-800 mr-3">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-red-600 hover:text-red-800">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `).join('');
+                    });
+                });
+
+                // Set initial level (0)
+                if (levelButtons.length > 0) {
+                    levelButtons[0].click();
+                }
+            }
+
+            // Request tabs functionality
+            function initRequestTabs() {
+                const tabs = document.querySelectorAll('.request-tab');
+                const contents = document.querySelectorAll('.request-content');
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const targetTab = tab.getAttribute('data-tab');
+                        
+                        // Update active tab
+                        tabs.forEach(t => {
+                            t.classList.remove('border-blue-600', 'text-blue-600');
+                            t.classList.add('border-transparent', 'text-slate-500');
+                        });
+                        tab.classList.remove('border-transparent', 'text-slate-500');
+                        tab.classList.add('border-blue-600', 'text-blue-600');
+                        
+                        // Show target content
+                        contents.forEach(content => content.classList.add('hidden'));
+                        document.getElementById(`${targetTab}-requests`).classList.remove('hidden');
+                    });
+                });
+            }
+
+            // Marketplace category filter functionality
+            function initMarketplaceFilters() {
+                const filters = document.querySelectorAll('.category-filter');
+                const appCards = document.querySelectorAll('.app-card');
+
+                filters.forEach(filter => {
+                    filter.addEventListener('click', () => {
+                        const category = filter.getAttribute('data-category');
+                        
+                        // Update active filter
+                        filters.forEach(f => {
+                            f.classList.remove('bg-blue-600', 'text-white');
+                            f.classList.add('bg-slate-100', 'text-slate-700');
+                        });
+                        filter.classList.remove('bg-slate-100', 'text-slate-700');
+                        filter.classList.add('bg-blue-600', 'text-white');
+                        
+                        // Filter apps
+                        appCards.forEach(card => {
+                            if (category === 'all' || card.getAttribute('data-category') === category) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            }
+
+            // Initialize all functionality
+            document.addEventListener('DOMContentLoaded', () => {
+                initNavigation();
+                initPrivacyLevels();
+                initRequestTabs();
+                initMarketplaceFilters();
+            });
+        })();
+    </script>
+</body>
+</html>
