@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(240 10% 9%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(240 10% 9%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(240 10% 9%);
+  --primary: hsl(220 83% 35%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(220 14% 42%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(210 40% 96%);
+  --muted-foreground: hsl(215 16% 47%);
+  --accent: hsl(142 71% 45%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(214 32% 91%);
+  --input: hsl(214 32% 91%);
+  --ring: hsl(220 83% 35%);
+  --warning: hsl(38 92% 50%);
+  --warning-foreground: hsl(0 0% 100%);
+  --success: hsl(142 71% 45%);
+  --success-foreground: hsl(0 0% 100%);
+  --chart-1: hsl(220 83% 35%);
+  --chart-2: hsl(142 71% 45%);
+  --chart-3: hsl(38 92% 50%);
+  --chart-4: hsl(0 84% 60%);
+  --chart-5: hsl(271 91% 65%);
+  --sidebar: hsl(0 0% 100%);
+  --sidebar-foreground: hsl(240 10% 9%);
+  --sidebar-primary: hsl(220 83% 35%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(210 40% 96%);
+  --sidebar-accent-foreground: hsl(220 83% 35%);
+  --sidebar-border: hsl(214 32% 91%);
+  --sidebar-ring: hsl(220 83% 35%);
+  --font-sans: 'Inter', ui-sans-serif, system-ui;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: hsl(224 71% 4%);
+  --foreground: hsl(213 31% 91%);
+  --card: hsl(224 71% 4%);
+  --card-foreground: hsl(213 31% 91%);
+  --popover: hsl(224 71% 4%);
+  --popover-foreground: hsl(213 31% 91%);
+  --primary: hsl(220 91% 58%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(215 27% 17%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(215 27% 17%);
+  --muted-foreground: hsl(217 32% 65%);
+  --accent: hsl(142 71% 45%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(215 27% 17%);
+  --input: hsl(215 27% 17%);
+  --ring: hsl(220 91% 58%);
+  --warning: hsl(38 92% 50%);
+  --warning-foreground: hsl(0 0% 100%);
+  --success: hsl(142 71% 45%);
+  --success-foreground: hsl(0 0% 100%);
+  --chart-1: hsl(220 91% 58%);
+  --chart-2: hsl(142 71% 45%);
+  --chart-3: hsl(38 92% 50%);
+  --chart-4: hsl(0 84% 60%);
+  --chart-5: hsl(271 91% 65%);
+  --sidebar: hsl(224 71% 4%);
+  --sidebar-foreground: hsl(213 31% 91%);
+  --sidebar-primary: hsl(220 91% 58%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(215 27% 17%);
+  --sidebar-accent-foreground: hsl(220 91% 58%);
+  --sidebar-border: hsl(215 27% 17%);
+  --sidebar-ring: hsl(220 91% 58%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/* IDShield Brand Color Glow Effect */
+@keyframes rgb-glow {
+  0% {
+    box-shadow: 0 0 20px 2px hsl(220, 83%, 35%); /* Primary Blue */
+  }
+  20% {
+    box-shadow: 0 0 20px 2px hsl(142, 71%, 45%); /* Accent Green */
+  }
+  40% {
+    box-shadow: 0 0 20px 2px hsl(38, 92%, 50%); /* Warning Orange */
+  }
+  60% {
+    box-shadow: 0 0 20px 2px hsl(0, 84%, 60%); /* Destructive Red */
+  }
+  80% {
+    box-shadow: 0 0 20px 2px hsl(271, 91%, 65%); /* Purple */
+  }
+  100% {
+    box-shadow: 0 0 20px 2px hsl(220, 83%, 35%); /* Back to Blue */
+  }
+}
+
+.glow-card {
+  animation: rgb-glow 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.glow-card:hover {
+  animation-duration: 2s;
+  box-shadow: 0 0 30px 4px hsl(220, 83%, 35%) !important;
+}
+
+/* Dark mode adjustments for glow */
+@media (prefers-color-scheme: dark) {
+  @keyframes rgb-glow {
+    0% {
+      box-shadow: 0 0 25px 3px hsl(220, 83%, 55%); /* Brighter Blue */
+    }
+    20% {
+      box-shadow: 0 0 25px 3px hsl(142, 71%, 65%); /* Brighter Green */
+    }
+    40% {
+      box-shadow: 0 0 25px 3px hsl(38, 92%, 60%); /* Brighter Orange */
+    }
+    60% {
+      box-shadow: 0 0 25px 3px hsl(0, 84%, 70%); /* Brighter Red */
+    }
+    80% {
+      box-shadow: 0 0 25px 3px hsl(271, 91%, 75%); /* Brighter Purple */
+    }
+    100% {
+      box-shadow: 0 0 25px 3px hsl(220, 83%, 55%); /* Back to Brighter Blue */
+    }
+  }
+  
+  .glow-card:hover {
+    box-shadow: 0 0 35px 5px hsl(220, 83%, 55%) !important;
+  }
+}
+
+@layer utilities {
+  .privacy-level-0 { @apply bg-gray-100 text-gray-600; }
+  .privacy-level-1 { @apply bg-blue-100 text-blue-600; }
+  .privacy-level-2 { @apply bg-green-100 text-green-600; }
+  .privacy-level-3 { @apply bg-yellow-100 text-yellow-600; }
+  .privacy-level-4 { @apply bg-orange-100 text-orange-600; }
+  .privacy-level-5 { @apply bg-red-100 text-red-600; }
+  .privacy-level-6 { @apply bg-purple-100 text-purple-600; }
+}

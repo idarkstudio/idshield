@@ -1,0 +1,63 @@
+Nivel 0 – Información Confidencial Absoluta
+
+Qué es: Los datos más sensibles del usuario. Nadie puede acceder excepto el propio usuario.
+
+Ejemplos: Llaves privadas, historial médico completo, datos biométricos en crudo.
+
+Acceso: Nunca se comparte ni con terceros ni con aplicaciones. Siempre cifrado.
+
+Nivel 1 – Información Sensible Controlada
+
+Qué es: Datos muy sensibles, pero que el usuario puede compartir de forma temporal y con consentimiento explícito.
+
+Ejemplos: Resultados de laboratorio, detalles financieros, diagnósticos médicos específicos.
+
+Acceso: Solo bajo permisos de corta duración (ej: 24h al médico) y siempre auditado.
+
+Nivel 2 – Información Privada
+
+Qué es: Datos privados que pueden necesitar compartir con instituciones o empresas de confianza.
+
+Ejemplos: Dirección, teléfono, historial académico/laboral.
+
+Acceso: Bajo permisos de usuarios o contratos, con control granular y trazabilidad.
+
+Nivel 3 – Información Interna
+
+Qué es: Datos usados en procesos internos de organizaciones, no necesariamente súper sensibles, pero no públicos.
+
+Ejemplos: Reportes de uso de seguro, evaluaciones internas, notas internas de empresas.
+
+Acceso: Compartidos con organizaciones autorizadas bajo acuerdos de privacidad.
+
+Nivel 4 – Información Pública Controlada
+
+Qué es: Datos que el usuario elige mostrar parcialmente o públicamente, pero con control.
+
+Ejemplos: Perfil profesional, certificaciones públicas, alias o identificadores en redes.
+
+Acceso: Puede mostrarse públicamente o en contextos específicos; el usuario define qué y a quién.
+
+Nivel 5 – Datos ZK (Zero-Knowledge Proofs)
+
+Qué es: Pruebas criptográficas que permiten demostrar algo sin revelar los datos reales.
+
+Ejemplos:
+
+Demostrar que tienes más de 18 años sin dar tu fecha de nacimiento.
+
+Demostrar que tu póliza de seguro está activa sin mostrar la póliza completa.
+
+Acceso: Se generan pruebas (ZK proofs) que terceros verifican sin ver el dato completo.
+
+Nivel 6 – Aplicaciones de Ecosistema
+
+Qué es: Nivel pensado para terceros que construyen apps encima de IDShield.
+
+Ejemplos:
+
+Un hospital crea una app para leer registros médicos con permisos de los pacientes.
+
+Una aseguradora construye su sistema sobre IDShield.
+
+Acceso: Los datos se usan bajo el control absoluto del usuario, con APIs y permisos, monetización posible por servicios.

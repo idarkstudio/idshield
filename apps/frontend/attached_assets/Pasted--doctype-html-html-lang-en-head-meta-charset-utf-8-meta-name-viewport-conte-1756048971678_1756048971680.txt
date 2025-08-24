@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IDShield – Sign in with Lace</title>
+  <style>
+    :root{color-scheme:dark light}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;background:#0b1220;color:#e5eefc}
+    .wrap{max-width:760px;margin:6rem auto;padding:0 1rem}
+    .card{background:#0f1730;border:1px solid #1f2b4a;border-radius:16px;padding:20px}
+    h1{margin:0 0 10px}
+    button{cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:600}
+    .primary{background:#22c55e;color:white}
+    .ghost{background:transparent;color:#22c55e;border:1px solid #22c55e}
+    .muted{opacity:.8}
+    code{background:#0b1328;border:1px solid #1f2b4a;padding:2px 6px;border-radius:6px}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .mt{margin-top:14px}
+    .ok{color:#22c55e}.warn{color:#f59e0b}.err{color:#f97316}
+    .kv{font-size:.9rem;line-height:1.4;background:#0b1328;border:1px solid #1f2b4a;border-radius:10px;padding:12px;word-break:break-word}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Sign in with Lace</h1>
+    <p class="muted">CIP-30 wallet login for <b>IDShield</b>. Your private key never leaves the wallet.</p>
+
+    <div class="card">
+      <div class="row">
+        <button id="detect" class="ghost">Detect Lace</button>
+        <button id="connect" class="primary">Connect Lace</button>
+        <button id="signin" class="ghost" disabled>Sign in</button>
+      </div>
+
+      <div id="status" class="mt muted">Status: waiting…</div>
+
+      <div class="mt">
+        <h3>Session</h3>
+        <div class="kv" id="session"></div>
+      </div>
+
+      <div class="mt">
+        <h3>Debug</h3>
+        <div class="kv" id="debug"></div>
+      </div>
+    </div>
+
+    <p class="mt muted">Tip: If Lace isn’t detected, install the wallet extension and refresh.</p>
+  </div>
+
+  <script type="module">
+    // --- Helpers ------------------------------------------------------------
+    const $ = (id) => document.getElementById(id);
+    const hexToUtf8 = (hex) => new TextDecoder().decode(new Uint8Array(hex.match(/.{1,2}/g).map(b => parseInt(b,16))));
+    const toHex = (u8) => Array.from(u8).map(b=>b.toString(16).padStart(2,'0')).join('');
+    const randomNonce = () => crypto.getRandomValues(new Uint8Array(24)); // 24 bytes
+
+    const ui = {
+      setStatus(msg, cls='') { $('status').className = `mt ${cls}`; $('status').textContent = `Status: ${msg}`; },
+      setSession(obj) { $('session').textContent = JSON.stringify(obj, null, 2); },
+      setDebug(obj) { $('debug').textContent = JSON.stringify(obj, null, 2); },
+      toggleSignedIn(is) { $('signin').disabled = !is; }
+    };
+
+    let api = null;            // CIP-30 API from Lace
+    let address = null;        // hex address from getUsed/getUnused
+    let nonceHex = null;       // hex-encoded random nonce
+
+    // --- Detection ----------------------------------------------------------
+    $('detect').addEventListener('click', () => {
+      const found = !!window.cardano?.lace;
+      ui.setStatus(found ? 'Lace detected' : 'Lace NOT detected', found ? 'ok' : 'warn');
+    });
+
+    // --- Connect to Lace ----------------------------------------------------
+    $('connect').addEventListener('click', async () => {
+      try {
+        if (!window.cardano?.lace) throw new Error('Lace not found. Install the extension.');
+        api = await window.cardano.lace.enable(); // prompts user for permission
+        const networkId = await api.getNetworkId(); // 1 mainnet, 0 testnet
+        const used = await api.getUsedAddresses();
+        const unused = await api.getUnusedAddresses();
+        address = (used[0] ?? unused[0]) || null;
+
+        ui.setStatus(`Connected to network ${networkId}`, 'ok');
+        ui.toggleSignedIn(true);
+        ui.setDebug({ networkId, usedCount: used.length, hasUnused: !!unused.length, address });
+      } catch (err) {
+        console.error(err);
+        ui.setStatus(`Connect failed: ${err.message}`, 'err');
+      }
+    });
+
+    // --- Sign-in flow (nonce + signData) -----------------------------------
+    $('signin').addEventListener('click', async () => {
+      try {
+        if (!api || !address) throw new Error('Connect wallet first.');
+        // 1) Create a nonce and sign the message
+        const nonce = randomNonce();
+        nonceHex = toHex(nonce);
+        const message = new TextEncoder().encode(`IDShield Login\nnonce:${nonceHex}\norigin:${location.origin}`);
+
+        // CIP-30 expects the address string as returned by wallet (hex bech32 in many wallets)
+        const sig = await api.signData(address, message); // returns { key, signature } (both hex)
+
+        const payload = {
+          address,
+          nonce: nonceHex,
+          signature: sig.signature,
+          key: sig.key
+        };
+
+        // 2) Show locally (in production, POST this to your backend to verify & mint a session cookie/JWT)
+        ui.setStatus('Signed in (local only). Send payload to backend to verify.', 'ok');
+        ui.setSession(payload);
+
+        // OPTIONAL: Example POST (uncomment and implement your /api/verify endpoint)
+        /*
+        const res = await fetch('/api/verify', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+        const out = await res.json();
+        ui.setStatus(out.ok ? 'Server verified signature. Session started.' : 'Verification failed', out.ok ? 'ok' : 'err');
+        */
+      } catch (err) {
+        console.error(err);
+        ui.setStatus(`Sign-in failed: ${err.message}`, 'err');
+      }
+    });
+  </script>
+</body>
+</html>

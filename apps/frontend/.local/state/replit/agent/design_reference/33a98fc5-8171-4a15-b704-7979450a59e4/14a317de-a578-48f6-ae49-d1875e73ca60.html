@@ -1,0 +1,746 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDShield - Privacy Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+                    },
+                    colors: {
+                        primary: '#1E40AF',
+                        secondary: '#6B7280',
+                        accent: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    
+    <!-- @COMPONENT: Header [logo, search, notifications, user menu] -->
+    <header class="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
+        <div class="flex items-center justify-between px-4 py-3">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                    <i class="fas fa-shield-alt text-white text-sm"></i>
+                </div>
+                <h1 class="text-xl font-bold text-gray-900">IDShield</h1>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-md mx-8">
+                <div class="relative">
+                    <input type="search" placeholder="Search vault, proofs, logs..." 
+                           class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" 
+                           data-mock="true">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="flex items-center space-x-4">
+                <!-- Notifications -->
+                <button class="relative p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100" data-event="click:showNotifications">
+                    <i class="fas fa-bell text-lg"></i>
+                    <span class="absolute -top-1 -right-1 w-5 h-5 bg-danger rounded-full text-xs text-white flex items-center justify-center" data-bind="notificationCount">3</span>
+                </button>
+
+                <!-- User Menu -->
+                <div class="relative">
+                    <button class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100" data-event="click:toggleUserMenu">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                            <span class="text-white text-sm font-medium" data-bind="user.initials">JD</span>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700" data-bind="user.name">John Doe</span>
+                        <i class="fas fa-chevron-down text-xs text-gray-500"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <div class="flex pt-16">
+        <!-- @COMPONENT: Sidebar [navigation menu] -->
+        <aside class="w-64 bg-white border-r border-gray-200 fixed left-0 top-16 bottom-0 overflow-y-auto">
+            <nav class="p-4 space-y-2">
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white" data-route="/overview">
+                    <i class="fas fa-chart-pie w-5"></i>
+                    <span class="font-medium">Overview</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100" data-route="/privacy-levels">
+                    <i class="fas fa-layer-group w-5"></i>
+                    <span>Privacy Levels (0–6)</span>
+                </a>
+
+                <div class="pt-2">
+                    <div class="flex items-center space-x-3 px-3 py-2 text-gray-500 text-sm font-medium">
+                        <i class="fas fa-vault w-5"></i>
+                        <span>My Vault</span>
+                    </div>
+                    <div class="ml-6 space-y-1">
+                        <a href="#" class="block px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded" data-route="/vault/health">Health</a>
+                        <a href="#" class="block px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded" data-route="/vault/insurance">Insurance</a>
+                        <a href="#" class="block px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded" data-route="/vault/ids">IDs</a>
+                    </div>
+                </div>
+
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100" data-route="/zk-proofs">
+                    <i class="fas fa-key w-5"></i>
+                    <span>ZK Proofs</span>
+                </a>
+
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100" data-route="/access-requests">
+                    <i class="fas fa-user-check w-5"></i>
+                    <span>Access Requests</span>
+                    <span class="ml-auto bg-warning text-white text-xs px-2 py-1 rounded-full" data-bind="pendingRequests">2</span>
+                </a>
+
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100" data-route="/audit-log">
+                    <i class="fas fa-clipboard-list w-5"></i>
+                    <span>Audit Log</span>
+                </a>
+
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100" data-route="/settings">
+                    <i class="fas fa-cog w-5"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+        <!-- @END_COMPONENT: Sidebar -->
+
+        <!-- @COMPONENT: MainArea [dashboard content] -->
+        <main class="flex-1 ml-64 p-6 space-y-6">
+            
+            <!-- Profile & Wallet Card -->
+            <!-- @COMPONENT: ProfileWalletCard [connection status, DID, address] -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white text-xl font-bold" data-bind="user.initials">JD</span>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900" data-bind="user.fullName">John Doe</h2>
+                            <p class="text-gray-600" data-bind="user.email">john.doe@example.com</p>
+                            <div class="flex items-center space-x-2 mt-2">
+                                <span class="inline-flex items-center space-x-1 text-accent text-sm font-medium">
+                                    <i class="fas fa-circle text-xs"></i>
+                                    <span>Lace Wallet Connected</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-gray-500">DID Address</p>
+                        <p class="text-sm font-mono text-gray-900 bg-gray-50 px-3 py-1 rounded" data-bind="user.did">did:cardano:addr1qx2f...8k9p</p>
+                        <button class="text-primary text-sm hover:underline mt-1" data-event="click:copyDID">
+                            <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: ProfileWalletCard -->
+
+            <!-- Shield Meter & Quick Actions Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Shield Meter -->
+                <!-- @COMPONENT: ShieldMeter [privacy levels 0-6, permissions] -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Privacy Shield Level</h3>
+                    
+                    <div class="text-center mb-6">
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <svg class="w-32 h-32 transform -rotate-90">
+                                <circle cx="64" cy="64" r="56" stroke="#E5E7EB" stroke-width="8" fill="none"/>
+                                <circle cx="64" cy="64" r="56" stroke="#1E40AF" stroke-width="8" fill="none" 
+                                        stroke-dasharray="351.86" stroke-dashoffset="175.93" stroke-linecap="round"/>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-center">
+                                    <span class="text-3xl font-bold text-primary" data-bind="privacyLevel">4</span>
+                                    <p class="text-sm text-gray-500">of 6</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <p class="text-lg font-semibold text-gray-900" data-bind="privacyStatus">High Privacy</p>
+                            <p class="text-sm text-gray-600">Most personal data is protected</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <!-- @MAP: privacyLevels.map(level => ( -->
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-900" data-mock="true">Identity Verification</span>
+                            </div>
+                            <span class="text-xs text-gray-500" data-mock="true">Level 4</span>
+                        </div>
+                        <!-- @END_MAP )) -->
+
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-900" data-mock="true">Health Records</span>
+                            </div>
+                            <span class="text-xs text-gray-500" data-mock="true">Level 6</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 border-2 border-dashed border-gray-300 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-plus text-white text-xs"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-500" data-mock="true">Financial Data</span>
+                            </div>
+                            <span class="text-xs text-gray-500" data-mock="true">Not Set</span>
+                        </div>
+                    </div>
+
+                    <button class="w-full mt-4 bg-primary text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors" data-event="click:managePermissions">
+                        Manage Permissions
+                    </button>
+                </div>
+                <!-- @END_COMPONENT: ShieldMeter -->
+
+                <!-- Quick Actions -->
+                <!-- @COMPONENT: QuickActions [generate ZK, grant access, revoke] -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                    
+                    <div class="space-y-4">
+                        <button class="w-full flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-primary hover:bg-blue-50 transition-colors group" data-event="click:generateProof">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center group-hover:bg-blue-600">
+                                    <i class="fas fa-certificate text-white"></i>
+                                </div>
+                                <div class="text-left">
+                                    <p class="font-medium text-gray-900">Generate ZK Proof</p>
+                                    <p class="text-sm text-gray-500">Create verifiable proof without revealing data</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </button>
+
+                        <button class="w-full flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-accent hover:bg-green-50 transition-colors group" data-event="click:grantAccess">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center group-hover:bg-green-600">
+                                    <i class="fas fa-user-plus text-white"></i>
+                                </div>
+                                <div class="text-left">
+                                    <p class="font-medium text-gray-900">Grant Access</p>
+                                    <p class="text-sm text-gray-500">Share specific data with trusted parties</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </button>
+
+                        <button class="w-full flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-danger hover:bg-red-50 transition-colors group" data-event="click:revokeAccess">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-danger rounded-lg flex items-center justify-center group-hover:bg-red-600">
+                                    <i class="fas fa-user-times text-white"></i>
+                                </div>
+                                <div class="text-left">
+                                    <p class="font-medium text-gray-900">Revoke Access</p>
+                                    <p class="text-sm text-gray-500">Remove permissions from entities</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </button>
+
+                        <div class="pt-4 border-t border-gray-200">
+                            <div class="grid grid-cols-2 gap-3">
+                                <button class="flex items-center justify-center space-x-2 py-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors" data-event="click:backupVault">
+                                    <i class="fas fa-download text-gray-600"></i>
+                                    <span class="text-sm font-medium text-gray-700">Backup</span>
+                                </button>
+                                <button class="flex items-center justify-center space-x-2 py-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors" data-event="click:exportProofs">
+                                    <i class="fas fa-external-link-alt text-gray-600"></i>
+                                    <span class="text-sm font-medium text-gray-700">Export</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: QuickActions -->
+            </div>
+
+            <!-- Access Requests Table -->
+            <!-- @COMPONENT: AccessRequestsTable [pending, approved, revoked requests] -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-900">Access Requests</h3>
+                        <div class="flex items-center space-x-3">
+                            <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm" data-filter="status">
+                                <option value="all">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="revoked">Revoked</option>
+                            </select>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700" data-event="click:refreshRequests">
+                                <i class="fas fa-sync-alt mr-2"></i>Refresh
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Requester</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Requested</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purpose</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- @MAP: accessRequests.map(request => ( -->
+                            <tr class="hover:bg-gray-50" data-mock="true">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                                            <span class="text-xs font-medium text-gray-600">HC</span>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">HealthCorp</p>
+                                            <p class="text-sm text-gray-500">health.corp@example.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Medical History</div>
+                                    <div class="text-sm text-gray-500">Birth date, allergies</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Treatment Planning</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-warning bg-opacity-10 text-warning">
+                                        Pending
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-15</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                                    <button class="text-accent hover:text-green-700" data-event="click:approveRequest">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="text-danger hover:text-red-700" data-event="click:denyRequest">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    <button class="text-gray-400 hover:text-gray-600" data-event="click:viewDetails">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- @END_MAP )) -->
+
+                            <tr class="hover:bg-gray-50" data-mock="true">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                                            <span class="text-xs font-medium text-gray-600">BC</span>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">BankCorp</p>
+                                            <p class="text-sm text-gray-500">verify@bankcorp.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Identity Verification</div>
+                                    <div class="text-sm text-gray-500">Age proof only</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Account Opening</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-accent bg-opacity-10 text-accent">
+                                        Approved
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-12</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                                    <button class="text-danger hover:text-red-700" data-event="click:revokeAccess">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                    <button class="text-gray-400 hover:text-gray-600" data-event="click:viewDetails">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50" data-mock="true">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                                            <span class="text-xs font-medium text-gray-600">IS</span>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">InsureSafe</p>
+                                            <p class="text-sm text-gray-500">claims@insuresafe.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Medical Records</div>
+                                    <div class="text-sm text-gray-500">Full access requested</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Claims Processing</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-danger bg-opacity-10 text-danger">
+                                        Denied
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-10</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                                    <button class="text-gray-400 hover:text-gray-600" data-event="click:viewDetails">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: AccessRequestsTable -->
+
+            <!-- Recent Activity / Audit Log -->
+            <!-- @COMPONENT: RecentActivity [who, what, when] -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-900">Recent Activity</h3>
+                        <button class="text-primary hover:text-blue-700 text-sm font-medium" data-event="click:viewFullAudit">
+                            View Full Audit Log
+                            <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <!-- @MAP: auditLog.map(entry => ( -->
+                        <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg" data-mock="true">
+                            <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900">
+                                    Access granted to <span class="font-semibold">BankCorp</span>
+                                </p>
+                                <p class="text-sm text-gray-500">Age verification proof generated and shared</p>
+                                <div class="flex items-center space-x-4 mt-2">
+                                    <span class="text-xs text-gray-400">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        2 hours ago
+                                    </span>
+                                    <span class="text-xs text-gray-400">
+                                        <i class="fas fa-shield-alt mr-1"></i>
+                                        Level 2 data
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600" data-event="click:viewAuditDetails">
+                                <i class="fas fa-external-link-alt text-sm"></i>
+                            </button>
+                        </div>
+                        <!-- @END_MAP )) -->
+
+                        <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg" data-mock="true">
+                            <div class="w-10 h-10 bg-warning rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-exclamation text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900">
+                                    New access request from <span class="font-semibold">HealthCorp</span>
+                                </p>
+                                <p class="text-sm text-gray-500">Requesting medical history and allergy information</p>
+                                <div class="flex items-center space-x-4 mt-2">
+                                    <span class="text-xs text-gray-400">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        4 hours ago
+                                    </span>
+                                    <span class="text-xs text-gray-400">
+                                        <i class="fas fa-shield-alt mr-1"></i>
+                                        Level 5 data
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600" data-event="click:viewAuditDetails">
+                                <i class="fas fa-external-link-alt text-sm"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg" data-mock="true">
+                            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-key text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900">
+                                    ZK Proof generated for identity verification
+                                </p>
+                                <p class="text-sm text-gray-500">Age proof created without revealing birth date</p>
+                                <div class="flex items-center space-x-4 mt-2">
+                                    <span class="text-xs text-gray-400">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        1 day ago
+                                    </span>
+                                    <span class="text-xs text-gray-400">
+                                        <i class="fas fa-shield-alt mr-1"></i>
+                                        Level 2 proof
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600" data-event="click:viewAuditDetails">
+                                <i class="fas fa-external-link-alt text-sm"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg" data-mock="true">
+                            <div class="w-10 h-10 bg-danger rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-times text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900">
+                                    Access denied to <span class="font-semibold">InsureSafe</span>
+                                </p>
+                                <p class="text-sm text-gray-500">Request for full medical records was rejected</p>
+                                <div class="flex items-center space-x-4 mt-2">
+                                    <span class="text-xs text-gray-400">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        2 days ago
+                                    </span>
+                                    <span class="text-xs text-gray-400">
+                                        <i class="fas fa-shield-alt mr-1"></i>
+                                        Level 6 data
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600" data-event="click:viewAuditDetails">
+                                <i class="fas fa-external-link-alt text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: RecentActivity -->
+
+        </main>
+        <!-- @END_COMPONENT: MainArea -->
+    </div>
+
+    <!-- @COMPONENT: GrantAccessModal [scope, level, TTL, sign with Lace] -->
+    <div id="grantAccessModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full max-h-screen overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold text-gray-900">Grant Access</h3>
+                    <button class="text-gray-400 hover:text-gray-600" data-event="click:closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Requester</label>
+                    <input type="text" placeholder="Organization or individual" class="w-full border border-gray-300 rounded-lg px-3 py-2" data-mock="true">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Data Scope</label>
+                    <select class="w-full border border-gray-300 rounded-lg px-3 py-2" data-mock="true">
+                        <option>Identity Verification</option>
+                        <option>Health Records</option>
+                        <option>Insurance Information</option>
+                        <option>Financial Data</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Privacy Level</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button class="p-3 border border-gray-300 rounded-lg text-center hover:border-primary hover:bg-blue-50" data-level="1">
+                            <div class="text-sm font-medium">Level 1</div>
+                            <div class="text-xs text-gray-500">Basic</div>
+                        </button>
+                        <button class="p-3 border border-gray-300 rounded-lg text-center hover:border-primary hover:bg-blue-50" data-level="2">
+                            <div class="text-sm font-medium">Level 2</div>
+                            <div class="text-xs text-gray-500">Standard</div>
+                        </button>
+                        <button class="p-3 border border-primary bg-blue-50 rounded-lg text-center" data-level="3">
+                            <div class="text-sm font-medium text-primary">Level 3</div>
+                            <div class="text-xs text-primary">Selected</div>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Time to Live (TTL)</label>
+                    <select class="w-full border border-gray-300 rounded-lg px-3 py-2" data-mock="true">
+                        <option>1 hour</option>
+                        <option>24 hours</option>
+                        <option>7 days</option>
+                        <option>30 days</option>
+                        <option>Custom</option>
+                    </select>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-info-circle text-primary"></i>
+                        <span class="text-sm font-medium text-gray-900">Sign with Lace Wallet</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-1">This action requires your digital signature to authorize access.</p>
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-gray-200 flex space-x-3">
+                <button class="flex-1 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300" data-event="click:cancelGrant">
+                    Cancel
+                </button>
+                <button class="flex-1 bg-primary text-white py-2 px-4 rounded-lg hover:bg-blue-700" data-event="click:signAndGrant">
+                    Sign & Grant Access
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: GrantAccessModal -->
+
+    <!-- @COMPONENT: GenerateProofModal [attribute selector, proof result] -->
+    <div id="generateProofModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full max-h-screen overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold text-gray-900">Generate ZK Proof</h3>
+                    <button class="text-gray-400 hover:text-gray-600" data-event="click:closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Proof Type</label>
+                    <select class="w-full border border-gray-300 rounded-lg px-3 py-2" data-mock="true">
+                        <option>Age Verification (18+)</option>
+                        <option>Income Range Proof</option>
+                        <option>Residency Proof</option>
+                        <option>Education Credential</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Select Attributes</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" class="rounded border-gray-300" checked data-mock="true">
+                            <span class="text-sm text-gray-700">Birth date (for age calculation)</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" class="rounded border-gray-300" data-mock="true">
+                            <span class="text-sm text-gray-700">Country of residence</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" class="rounded border-gray-300" data-mock="true">
+                            <span class="text-sm text-gray-700">Citizenship status</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-shield-alt text-amber-600"></i>
+                        <span class="text-sm font-medium text-gray-900">Privacy Protected</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-1">Only the proof result will be shared, not your actual data.</p>
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-gray-200 flex space-x-3">
+                <button class="flex-1 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300" data-event="click:cancelProof">
+                    Cancel
+                </button>
+                <button class="flex-1 bg-primary text-white py-2 px-4 rounded-lg hover:bg-blue-700" data-event="click:generateProof">
+                    Generate Proof
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: GenerateProofModal -->
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        (function() {
+            // Modal management
+            let currentModal = null;
+
+            function showModal(modalId) {
+                if (currentModal) {
+                    document.getElementById(currentModal).classList.add('hidden');
+                }
+                currentModal = modalId;
+                document.getElementById(modalId).classList.remove('hidden');
+            }
+
+            function closeModal() {
+                if (currentModal) {
+                    document.getElementById(currentModal).classList.add('hidden');
+                    currentModal = null;
+                }
+            }
+
+            // Event handlers for demonstration
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[data-event*="grantAccess"]')) {
+                    showModal('grantAccessModal');
+                } else if (e.target.closest('[data-event*="generateProof"]')) {
+                    showModal('generateProofModal');
+                } else if (e.target.closest('[data-event*="closeModal"]') || 
+                          e.target.closest('[data-event*="cancel"]')) {
+                    closeModal();
+                } else if (e.target === document.getElementById('grantAccessModal') || 
+                          e.target === document.getElementById('generateProofModal')) {
+                    closeModal();
+                }
+            });
+
+            // Privacy level selection in modal
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[data-level]')) {
+                    const buttons = document.querySelectorAll('[data-level]');
+                    buttons.forEach(btn => {
+                        btn.className = btn.className.replace('border-primary bg-blue-50', 'border-gray-300').replace('text-primary', '');
+                        btn.querySelector('.text-xs').className = 'text-xs text-gray-500';
+                    });
+                    
+                    const clickedBtn = e.target.closest('[data-level]');
+                    clickedBtn.className = clickedBtn.className.replace('border-gray-300', 'border-primary bg-blue-50');
+                    clickedBtn.querySelector('.text-sm').className = 'text-sm font-medium text-primary';
+                    clickedBtn.querySelector('.text-xs').className = 'text-xs text-primary';
+                    clickedBtn.querySelector('.text-xs').textContent = 'Selected';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
