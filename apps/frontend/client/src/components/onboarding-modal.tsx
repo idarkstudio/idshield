@@ -60,7 +60,29 @@ export default function OnboardingModal({ open, onComplete, user }: OnboardingMo
 
   const updateProfileMutation = useMutation({
     mutationFn: async (data: OnboardingFormData) => {
-      const response = await apiRequest("PATCH", "/api/profile", data);
+      // Get wallet connection info from localStorage if available
+      const session = localStorage.getItem('idshield_session');
+      let walletInfo = {};
+      
+      if (session) {
+        try {
+          const sessionData = JSON.parse(session);
+          walletInfo = {
+            didAddress: sessionData.address,
+            walletConnected: true,
+            walletBalance: "0.00", // Default balance, could be updated by checking actual wallet
+          };
+        } catch (e) {
+          console.warn('Failed to parse session data:', e);
+        }
+      }
+      
+      const profileData = { 
+        ...data,
+        ...walletInfo
+      };
+      
+      const response = await apiRequest("PATCH", "/api/profile", profileData);
       return response.json();
     },
     onSuccess: () => {
@@ -68,6 +90,7 @@ export default function OnboardingModal({ open, onComplete, user }: OnboardingMo
         title: "Welcome to IDShield!",
         description: "Your profile has been set up successfully.",
       });
+      // Invalidate and refetch dashboard data
       queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
       onComplete();
     },

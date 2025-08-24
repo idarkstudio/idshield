@@ -13,7 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import type { User, VaultItem, AccessRequest, AuditLog } from "@shared/schema";
 
 interface DashboardData {
-  user: User;
+  user: User | null;
   vaultItems: VaultItem[];
   accessRequests: AccessRequest[];
   auditLogs: AuditLog[];
@@ -28,8 +28,8 @@ export default function Dashboard() {
 
   const pendingRequests = dashboardData?.accessRequests?.filter(req => req.status === "pending") || [];
 
-  // Check if user needs onboarding (first-time user)
-  const needsOnboarding = dashboardData?.user && (
+  // Check if user needs onboarding (first-time user or no user data)
+  const needsOnboarding = !dashboardData?.user || (
     !dashboardData.user.fullName || 
     dashboardData.user.fullName.trim() === "" ||
     dashboardData.user.fullName === "John Doe" // Default demo name
@@ -63,7 +63,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header user={dashboardData?.user} pendingRequestsCount={pendingRequests.length} />
+      <Header user={dashboardData?.user || undefined} pendingRequestsCount={pendingRequests.length} />
       
       <div className="flex pt-16">
         <Sidebar />
@@ -81,11 +81,11 @@ export default function Dashboard() {
             </div>
           ) : dashboardData ? (
             <>
-              <ProfileWalletCard user={dashboardData.user} />
+              <ProfileWalletCard user={dashboardData.user || undefined} />
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <ShieldMeter 
-                  user={dashboardData.user} 
+                  user={dashboardData.user || undefined} 
                   vaultItems={dashboardData.vaultItems || []} 
                 />
                 <QuickActions />
@@ -100,13 +100,13 @@ export default function Dashboard() {
       </div>
 
       {/* Onboarding Modal */}
-      {dashboardData?.user && (
-        <OnboardingModal
-          open={showOnboarding}
-          onComplete={() => setShowOnboarding(false)}
-          user={dashboardData.user}
-        />
-      )}
+      <OnboardingModal
+        open={showOnboarding}
+        onComplete={() => {
+          setShowOnboarding(false);
+        }}
+        user={dashboardData?.user}
+      />
     </div>
   );
 }

@@ -340,6 +340,7 @@ export default function ZKProofs() {
               <CardContent>
                 <div className="text-2xl font-bold text-green-600">
                   {zkProofs.filter(proof => {
+                    if (!proof.createdAt) return false;
                     const weekAgo = new Date();
                     weekAgo.setDate(weekAgo.getDate() - 7);
                     return new Date(proof.createdAt) > weekAgo;
@@ -758,7 +759,7 @@ export default function ZKProofs() {
                             <div className="flex items-center space-x-4 text-xs text-muted-foreground">
                               <span className="flex items-center" data-testid={`proof-date-${proof.id}`}>
                                 <Calendar className="h-3 w-3 mr-1" />
-                                {format(new Date(proof.createdAt), "MMM dd, yyyy 'at' HH:mm")}
+                                {proof.createdAt ? format(new Date(proof.createdAt), "MMM dd, yyyy 'at' HH:mm") : "Date unavailable"}
                               </span>
                               <span className="flex items-center">
                                 <QrCode className="h-3 w-3 mr-1" />

@@ -13,7 +13,8 @@ export const users = pgTable("users", {
   bio: text("bio"),
   profilePicture: text("profile_picture"),
   didAddress: text("did_address").notNull(),
-  walletConnected: boolean("wallet_connected").default(true),
+  walletConnected: boolean("wallet_connected").default(false),
+  walletBalance: text("wallet_balance").default("0.00"),
   userType: text("user_type").default("citizen"), // citizen, police
   privacyLevel: integer("privacy_level").default(4),
   createdAt: timestamp("created_at").defaultNow(),

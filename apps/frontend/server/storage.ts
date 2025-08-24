@@ -20,6 +20,7 @@ export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  createUserWithId(id: string, user: InsertUser): Promise<User>;
   updateUser(id: string, updates: Partial<User>): Promise<User>;
 
   // Vault Items
@@ -64,149 +65,13 @@ export class MemStorage implements IStorage {
     this.zkProofs = new Map();
     this.medicalFormTokens = new Map();
 
-    // Initialize with demo user and data
+    // Initialize with clean, empty data
     this.initializeDemoData();
   }
 
   private initializeDemoData() {
-    const userId = "demo-user-123";
-    const now = new Date();
-
-    // Demo user
-    const demoUser: User = {
-      id: userId,
-      username: "johndoe",
-      email: "john.doe@example.com",
-      fullName: "John Doe",
-      phone: "+1 (555) 123-4567",
-      location: "San Francisco, CA",
-      bio: "Privacy advocate and tech enthusiast. Building secure digital identities.",
-      profilePicture: null,
-      didAddress: "did:cardano:addr1qx2f...8k9p",
-      walletConnected: true,
-      userType: "police" as string | null, // Set demo user as police to test police features
-      privacyLevel: 4,
-      createdAt: now,
-      updatedAt: now,
-    };
-    this.users.set(userId, demoUser);
-
-    // Demo vault items
-    const vaultItems: VaultItem[] = [
-      {
-        id: randomUUID(),
-        userId,
-        category: "health",
-        name: "Medical History",
-        privacyLevel: 6,
-        data: { type: "medical_records", allergies: ["peanuts"], conditions: [] },
-        createdAt: now,
-      },
-      {
-        id: randomUUID(),
-        userId,
-        category: "ids",
-        name: "Driver's License",
-        privacyLevel: 4,
-        data: { type: "drivers_license", state: "CA" },
-        createdAt: now,
-      },
-      {
-        id: randomUUID(),
-        userId,
-        category: "insurance",
-        name: "Health Insurance",
-        privacyLevel: 5,
-        data: { type: "health_insurance", provider: "HealthCorp" },
-        createdAt: now,
-      },
-    ];
-
-    vaultItems.forEach(item => this.vaultItems.set(item.id, item));
-
-    // Demo access requests
-    const accessRequests: AccessRequest[] = [
-      {
-        id: randomUUID(),
-        userId,
-        requesterName: "HealthCorp",
-        requesterEmail: "health.corp@example.com",
-        dataRequested: "Medical History",
-        purpose: "Treatment Planning",
-        status: "pending",
-        privacyLevel: 5,
-        requestDate: new Date(Date.now() - 4 * 60 * 60 * 1000), // 4 hours ago
-        responseDate: null,
-      },
-      {
-        id: randomUUID(),
-        userId,
-        requesterName: "BankCorp",
-        requesterEmail: "verify@bankcorp.com",
-        dataRequested: "Identity Verification",
-        purpose: "Account Opening",
-        status: "approved",
-        privacyLevel: 2,
-        requestDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
-        responseDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000), // 2 hours after request
-      },
-      {
-        id: randomUUID(),
-        userId,
-        requesterName: "InsureSafe",
-        requesterEmail: "claims@insuresafe.com",
-        dataRequested: "Medical Records",
-        purpose: "Claims Processing",
-        status: "denied",
-        privacyLevel: 6,
-        requestDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
-        responseDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000 + 1 * 60 * 60 * 1000), // 1 hour after request
-      },
-    ];
-
-    accessRequests.forEach(request => this.accessRequests.set(request.id, request));
-
-    // Demo audit logs
-    const auditLogs: AuditLog[] = [
-      {
-        id: randomUUID(),
-        userId,
-        action: "access_granted",
-        description: "Access granted to BankCorp",
-        entityName: "BankCorp",
-        privacyLevel: 2,
-        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
-      },
-      {
-        id: randomUUID(),
-        userId,
-        action: "access_request_received",
-        description: "New access request from HealthCorp",
-        entityName: "HealthCorp",
-        privacyLevel: 5,
-        timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000), // 4 hours ago
-      },
-      {
-        id: randomUUID(),
-        userId,
-        action: "zk_proof_generated",
-        description: "ZK Proof generated for identity verification",
-        entityName: null,
-        privacyLevel: 2,
-        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
-      },
-      {
-        id: randomUUID(),
-        userId,
-        action: "access_denied",
-        description: "Access denied to InsureSafe",
-        entityName: "InsureSafe",
-        privacyLevel: 6,
-        timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
-      },
-    ];
-
-    auditLogs.forEach(log => this.auditLogs.set(log.id, log));
+    // Application starts with clean, empty data
+    // All data will be created by actual users through the application
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -225,8 +90,29 @@ export class MemStorage implements IStorage {
       location: insertUser.location || null,
       bio: insertUser.bio || null,
       profilePicture: insertUser.profilePicture || null,
-      walletConnected: insertUser.walletConnected || null,
-      privacyLevel: insertUser.privacyLevel || null,
+      walletConnected: insertUser.walletConnected || false,
+      walletBalance: insertUser.walletBalance || "0.00",
+      userType: insertUser.userType || "citizen",
+      privacyLevel: insertUser.privacyLevel || 4,
+      updatedAt: insertUser.updatedAt || null,
+      id,
+      createdAt: new Date(),
+    };
+    this.users.set(id, user);
+    return user;
+  }
+
+  async createUserWithId(id: string, insertUser: InsertUser): Promise<User> {
+    const user: User = { 
+      ...insertUser,
+      phone: insertUser.phone || null,
+      location: insertUser.location || null,
+      bio: insertUser.bio || null,
+      profilePicture: insertUser.profilePicture || null,
+      walletConnected: insertUser.walletConnected || false,
+      walletBalance: insertUser.walletBalance || "0.00",
+      userType: insertUser.userType || "citizen",
+      privacyLevel: insertUser.privacyLevel || 4,
       updatedAt: insertUser.updatedAt || null,
       id,
       createdAt: new Date(),
